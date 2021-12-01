@@ -11,18 +11,17 @@ namespace AdventOfCodeConsole
         internal static async Task Day1A()
         {
             var input = await AdventOfCode.GetInputForDay(1);
-            var lines = input.Split('\n').Where(s => s != "").ToList();
-            var count = 0;
+            var lines = input
+                .Split('\n')
+                .Where(n => n != "")
+                .Select(int.Parse)
+                .ToList();
 
-            for (var i = 1; i < lines.Count; i++)
-            {
-                if (int.Parse(lines[i - 1]) < int.Parse(lines[i]))
-                {
-                    count++;
-                }
-            }
+            var sub = lines
+                .Select((n, i) => i != 0 && lines[i - 1] < n)
+                .Count(b => b);
 
-            Console.Write(count);
+            Console.Write(sub);
         }
     }
 }
