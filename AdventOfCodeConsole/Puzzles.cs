@@ -11,17 +11,38 @@ namespace AdventOfCodeConsole
         internal static async Task Day1A()
         {
             var input = await AdventOfCode.GetInputForDay(1);
-            var lines = input
-                .Split('\n')
-                .Where(n => n != "")
+            var depths = input
+                .Split('\n', StringSplitOptions.RemoveEmptyEntries)
                 .Select(int.Parse)
-                .ToList();
+                .ToArray();
 
-            var sub = lines
-                .Select((n, i) => i != 0 && lines[i - 1] < n)
+            var sub = depths
+                .Select((n, i) => i != 0 && depths[i - 1] < n)
                 .Count(b => b);
 
             Console.Write(sub);
+        }
+
+        internal static async Task Day1B()
+        {
+            var input = await AdventOfCode.GetInputForDay(1);
+            var depths = input
+                .Split('\n', StringSplitOptions.RemoveEmptyEntries)
+                .Select(int.Parse)
+                .ToArray();
+
+            var count = 0;
+
+            for (var i = 2; i < depths.Length - 1; i++)
+            {
+                // a + b + c > b + c + d is the same as a > d
+                if (depths[i + 1] > depths[i - 2])
+                {
+                    count++;
+                }
+            }
+
+            Console.Write(count);
         }
     }
 }
