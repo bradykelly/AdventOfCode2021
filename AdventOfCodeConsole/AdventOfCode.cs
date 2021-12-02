@@ -7,9 +7,9 @@ namespace AdventOfCodeConsole;
 
 internal static class AdventOfCode
 {
-    internal static async Task<string> GetInputForDay(int day)
+    internal static async Task<string?> GetInputForDay(int day)
     {
-        string input;
+        string? input;
 
         var filename = $"Day_{day}_Input.txt";
         if (!File.Exists(filename))

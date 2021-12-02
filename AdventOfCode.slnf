@@ -1,0 +1,8 @@
+{
+  "solution": {
+    "path": "AdventOfCode.sln",
+    "projects": [
+      "AdventOfCodeConsole\\AdventOfCodeConsole.csproj"
+    ]
+  }
+}

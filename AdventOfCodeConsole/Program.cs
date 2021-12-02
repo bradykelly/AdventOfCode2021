@@ -1,3 +1,10 @@
 ﻿using AdventOfCodeConsole;
+using AdventOfCodeConsole.Benchmarks;
+using BenchmarkDotNet.Running;
 
-await Puzzles.Day2B();
+var summary = BenchmarkRunner.Run<Day2Bench>();
+//var runner = new Day1Bench();
+//await runner.Setup();
+//runner.Part1();
+//runner.Part2();
+//runner.ShowResults();
