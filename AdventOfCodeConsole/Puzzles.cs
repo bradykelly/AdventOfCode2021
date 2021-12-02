@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.CompilerServices;
 
 namespace AdventOfCodeConsole
 {
@@ -17,6 +13,7 @@ namespace AdventOfCodeConsole
                 .ToArray();
             return depths;
         }
+
         internal static async Task Day1A()
         {
             var depths = await GetIntsForDay(1);
@@ -44,6 +41,70 @@ namespace AdventOfCodeConsole
             }
 
             Console.Write(count);
+        }
+
+        internal static async Task Day2A()
+        {
+            (int horizontal, int vertical) position = (0, 0);
+
+            var input = await AdventOfCode.GetInputForDay(2);
+            var directions = input
+                .Split('\n', StringSplitOptions.RemoveEmptyEntries)
+                .ToList();
+
+            foreach (var direction in directions)
+            {
+                var move = direction.Split(" ");
+                var distance = int.Parse(move[1]);
+
+                switch (move[0])
+                {
+                    case "forward":
+                        position.horizontal += distance;
+                        break;
+                    case "down":
+                        position.vertical += distance;
+                        break;
+                    case "up":
+                        position.vertical -= distance;
+                        break;
+                }
+            }
+
+            Console.WriteLine(position.vertical * position.horizontal);
+        }
+
+        internal static async Task Day2B()
+        {
+            (int horizontal, int vertical) position = (0, 0);
+            var aim = 0;
+
+            var input = await AdventOfCode.GetInputForDay(2);
+            var directions = input
+                .Split('\n', StringSplitOptions.RemoveEmptyEntries)
+                .ToList();
+
+            foreach (var direction in directions)
+            {
+                var move = direction.Split(" ");
+                var distance = int.Parse(move[1]);
+
+                switch (move[0])
+                {
+                    case "forward":
+                        position.horizontal += distance;
+                        position.vertical += aim * distance;
+                        break;
+                    case "down":
+                        aim += distance;
+                        break;
+                    case "up":
+                        aim -= distance;
+                        break;
+                }
+            }
+
+            Console.WriteLine(position.vertical * position.horizontal);
         }
     }
 }

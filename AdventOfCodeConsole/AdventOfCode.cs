@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace AdventOfCodeConsole;
 
-internal class AdventOfCode
+internal static class AdventOfCode
 {
     internal static async Task<string> GetInputForDay(int day)
     {

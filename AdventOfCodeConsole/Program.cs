@@ -1,3 +1,3 @@
 ﻿using AdventOfCodeConsole;
 
-await Puzzles.Day1B();
+await Puzzles.Day2B();
