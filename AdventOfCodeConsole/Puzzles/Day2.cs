@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCodeConsole.Puzzles;
 
-public static class Day2
+internal static class Day2
 {
     public static int Part1(string? input)
     {
