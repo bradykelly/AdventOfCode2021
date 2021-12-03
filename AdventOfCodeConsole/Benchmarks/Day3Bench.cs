@@ -5,11 +5,19 @@ namespace AdventOfCodeConsole.Benchmarks;
 
 [MemoryDiagnoser(false)]
 [SimpleJob(launchCount: 1, warmupCount: 10, targetCount: 10)]
-public class Day3Bench
+public class Day3Bench : IDayBench
 {
     private string? _input;
     private int _output1;
     private int _output2;
+
+    public async Task Run()
+    {
+        await Setup();
+        Part1();
+        Part2();
+        ShowResults();
+    }
 
     [GlobalSetup]
     public async Task Setup()

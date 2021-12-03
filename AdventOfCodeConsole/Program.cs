@@ -2,10 +2,12 @@
 using AdventOfCodeConsole.Benchmarks;
 using BenchmarkDotNet.Running;
 
-
-var summary = BenchmarkRunner.Run<Day2Bench>();
-//var runner = new Day3Bench();
-//await runner.Setup();
-//runner.Part1();
-//runner.Part2();
-//runner.ShowResults();
+args = new[] { "/bench" };
+if (args.Length > 0 && args[0] == "/bench")
+{
+    BenchmarkRunner.Run<Day3Bench>();
+}
+else
+{
+    await new Day3Bench().Run();
+}
