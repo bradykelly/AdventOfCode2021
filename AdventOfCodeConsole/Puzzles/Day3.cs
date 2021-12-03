@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using System.Text;
 
 namespace AdventOfCodeConsole.Puzzles;
 
@@ -48,24 +49,23 @@ internal static class Day3
 
     public static int Part1(string input)
     {
-        var binary = "";
         var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries).ToList();
-        for (var pos = 0; pos < lines[0].Length; pos++)
+        var lineLength = lines[0].Length;
+
+        var gammaBinary = new StringBuilder(lineLength);
+        var epsilonBinary = new StringBuilder(lineLength);
+
+        for (var pos = 0; pos < lineLength; pos++)
         {
             var mostCommon = MostCommonBit(pos, lines);
-            binary += mostCommon;
-        }
+            gammaBinary.Append(mostCommon);
 
-        var gamma = Convert.ToInt32(binary, 2);
-
-        binary = "";
-        for (var pos = 0; pos < lines[0].Length; pos++)
-        {
             var leastCommon = LeastCommonBit(pos, lines);
-            binary += leastCommon;
+            epsilonBinary.Append(leastCommon);
         }
 
-        var epsilon = Convert.ToInt32(binary, 2);
+        var gamma = Convert.ToInt32(gammaBinary.ToString(), 2);
+        var epsilon = Convert.ToInt32(epsilonBinary.ToString(), 2);
 
         return gamma * epsilon;
     }
