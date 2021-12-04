@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace AdventOfCodeConsole.Puzzles;
+﻿namespace AdventOfCodeConsole.Puzzles;
 
 public class Day4 : IDay
 {
@@ -17,7 +15,7 @@ public class Day4 : IDay
 
     private class Board
     {
-        private Number[,] Numbers { get; set; } = new Number[5, 5];
+        private Number[,] Numbers { get; } = new Number[5, 5];
 
         public Board(ReadOnlySpan<string> rows)
         //public Board(IReadOnlyList<string> rows)
@@ -119,7 +117,7 @@ public class Day4 : IDay
 
         var calledNumbers = inputLines[0].Split(',').Select(int.Parse).ToList();
 
-        List<(Board board, int call)> winningBoards = new List<(Board b, int c)>();
+        List<(Board board, int call)> winningBoards = new();
         foreach (var call in calledNumbers)
         {
             foreach (var board in boards)
