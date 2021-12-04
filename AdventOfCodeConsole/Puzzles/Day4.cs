@@ -10,6 +10,19 @@ public class Day4 : IDay
 
     private class Board
     {
+        public Board(string[] rows)
+        {
+            for (var y = 0; y < rows.Length; y++)
+            {
+                var rowNumbers = rows[y].Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                for (var x = 0; x < rowNumbers.Length; x++)
+                {
+                    Numbers[y, x] = new Number();
+                    Numbers[y, x].Value = int.Parse(rowNumbers[x]);
+                }
+            }
+        }
+
         public Number[,] Numbers { get; set; } = new Number[5, 5];
     }
 
@@ -22,18 +35,8 @@ public class Day4 : IDay
 
         for (var mainY = 2; mainY < inputLines.Length - 4; mainY += 6)
         {
-            //Board? currentBoard = null;
-            //if (string.IsNullOrWhiteSpace(inputLines[mainY]))
-            //{
-            //    if (currentBoard != null)
-            //    {
-            //        boards.Add(currentBoard);
-            //        currentBoard = new Board();
-            //    }
-            //    continue;
-            //}
-
             var boardLines = inputLines[(mainY) ..(mainY + 5)];
+            boards.Add(new Board(boardLines));
         }
 
 
