@@ -3,6 +3,8 @@ using BenchmarkDotNet.Attributes;
 
 namespace AdventOfCodeConsole.Benchmarks;
 
+[MemoryDiagnoser(false)]
+[SimpleJob(launchCount: 1, warmupCount: 10, targetCount: 50)]
 public class DayRunnerBase<T> where T: IDay, new() 
 {
     private readonly int _dayNumber;
@@ -11,9 +13,12 @@ public class DayRunnerBase<T> where T: IDay, new()
     private int _output2;
     private T _day;
 
-    public DayRunnerBase(int dayNumber)
+    public DayRunnerBase()
     {
-        _dayNumber = dayNumber;
+        var genType = this.GetType().BaseType;
+        var paramTypeName = genType.GetGenericArguments()[0].Name;
+        if (int.TryParse(paramTypeName.Replace("Day", ""), out var dayNumber))
+            _dayNumber = dayNumber;
         _day = new T();
     }
 
