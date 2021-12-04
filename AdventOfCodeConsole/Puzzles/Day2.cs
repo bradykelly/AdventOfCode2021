@@ -1,8 +1,8 @@
 ﻿namespace AdventOfCodeConsole.Puzzles;
 
-internal static class Day2
+public class Day2: IDay
 {
-    public static int Part1(string? input)
+    public int Part1(string? input)
     {
         var (horizontal, vertical) = (0, 0);
 
@@ -32,7 +32,7 @@ internal static class Day2
         return vertical * horizontal;
     }
 
-    public static int Part2(string? input)
+    public int Part2(string? input)
     {
         var (horizontal, vertical) = (0, 0);
         var aim = 0;

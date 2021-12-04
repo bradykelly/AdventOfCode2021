@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCodeConsole.Puzzles
 {
-    internal static class Day1
+    public class Day1: IDay
     {
         private static int[] GetIntsFromInput(string? input)
         {
@@ -10,7 +10,7 @@
                 .ToArray();
         }
 
-        public static int Part1(string? input)
+        public int Part1(string? input)
         {
             var depths = GetIntsFromInput(input);
             return depths
@@ -18,7 +18,7 @@
                 .Count(b => b);
         }
 
-        internal static int Part2(string? input)
+        public int Part2(string? input)
         {
             var depths = GetIntsFromInput(input);
 

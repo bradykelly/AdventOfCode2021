@@ -3,7 +3,7 @@ using System.Text;
 
 namespace AdventOfCodeConsole.Puzzles;
 
-internal static class Day3
+public class Day3 : IDay
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static char? MostCommonBit(int pos, List<string> binaries)
@@ -47,7 +47,7 @@ internal static class Day3
         return count1 == count0 ? null : count1 > count0 ? '0' : '1';
     }
 
-    public static int Part1(string input)
+    public int Part1(string input)
     {
         var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries).ToList();
         var lineLength = lines[0].Length;
@@ -70,7 +70,7 @@ internal static class Day3
         return gamma * epsilon;
     }
 
-    public static int Part2(string input)
+    public int Part2(string input)
     {
         var binaries = input.Split('\n', StringSplitOptions.RemoveEmptyEntries).ToList();
         var binaryLength = binaries[0].Length;

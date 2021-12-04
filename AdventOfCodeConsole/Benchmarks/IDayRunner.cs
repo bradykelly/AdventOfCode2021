@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCodeConsole.Benchmarks;
 
-public interface IDayBench
+public interface IDayRunner
 {
     public Task Setup();
     public void ShowResults();
