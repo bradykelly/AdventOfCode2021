@@ -1,4 +1,4 @@
-﻿using Microsoft.Diagnostics.Runtime.ICorDebug;
+﻿using System.Runtime.CompilerServices;
 
 namespace AdventOfCodeConsole.Puzzles;
 
@@ -11,7 +11,7 @@ public class Day4 : IDay
             Value = value;
         }
 
-        internal int Value { get; set; }
+        internal int Value { get; }
         internal bool Marked { get; set; }
     }
 
@@ -19,12 +19,12 @@ public class Day4 : IDay
     {
         private Number[,] Numbers { get; set; } = new Number[5, 5];
 
-        //public Board(ReadOnlySpan<string> rows)
-        public Board(IReadOnlyList<string> rows)
+        public Board(ReadOnlySpan<string> rows)
+        //public Board(IReadOnlyList<string> rows)
         {
             for (var y = 0; y < 5; y++)
             {
-                var rowNumbers = rows[y].Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                ReadOnlySpan<string> rowNumbers = rows[y].Split(' ', StringSplitOptions.RemoveEmptyEntries);
                 for (var x = 0; x < 5; x++)
                 {
                     Numbers[y, x] = new Number(int.Parse(rowNumbers[x]));
@@ -86,7 +86,7 @@ public class Day4 : IDay
 
         for (var mainY = 2; mainY < inputLines.Length - 4; mainY += 6)
         {
-            var boardLines = inputLines[(mainY) ..(mainY + 5)];
+            var boardLines = inputLines[(mainY)..(mainY + 5)];
             boards.Add(new Board(boardLines));
         }
 
@@ -107,6 +107,34 @@ public class Day4 : IDay
 
     public int Part2(string input)
     {
-        return 0;
+        var inputLines = input.Split('\n');
+
+        var boards = new List<Board?>();
+
+        for (var mainY = 2; mainY < inputLines.Length - 4; mainY += 6)
+        {
+            var boardLines = inputLines[(mainY)..(mainY + 5)];
+            boards.Add(new Board(boardLines));
+        }
+
+        var calledNumbers = inputLines[0].Split(',').Select(int.Parse).ToList();
+
+        List<(Board board, int call)> winningBoards = new List<(Board b, int c)>();
+        foreach (var call in calledNumbers)
+        {
+            foreach (var board in boards)
+            {
+                if (winningBoards.Any(t => t.board == board))
+                    continue;
+
+                if (board!.Mark(call))
+                {
+                    winningBoards.Add((board, call));
+                }
+            }
+        }
+
+        var lastBoard = winningBoards.Last();
+        return lastBoard.board.SumUnmarked() * lastBoard.call;
     }
 }
