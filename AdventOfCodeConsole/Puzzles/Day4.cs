@@ -15,17 +15,16 @@ public class Day4 : IDay
 
     private class Board
     {
-        private Number[,] Numbers { get; } = new Number[5, 5];
+        private readonly Number[,] _numbers = new Number[5, 5];
 
         public Board(ReadOnlySpan<string> rows)
-        //public Board(IReadOnlyList<string> rows)
         {
             for (var y = 0; y < 5; y++)
             {
                 ReadOnlySpan<string> rowNumbers = rows[y].Split(' ', StringSplitOptions.RemoveEmptyEntries);
                 for (var x = 0; x < 5; x++)
                 {
-                    Numbers[y, x] = new Number(int.Parse(rowNumbers[x]));
+                    _numbers[y, x] = new Number(int.Parse(rowNumbers[x]));
                 }
             }
         }
@@ -34,7 +33,7 @@ public class Day4 : IDay
         {
             for (var y = 0; y < 5; y++)
             {
-                if (Numbers[y, 0].Marked && Numbers[y, 1].Marked && Numbers[y, 2].Marked && Numbers[y, 3].Marked && Numbers[y, 4].Marked)
+                if (_numbers[y, 0].Marked && _numbers[y, 1].Marked && _numbers[y, 2].Marked && _numbers[y, 3].Marked && _numbers[y, 4].Marked)
                     return true;
             }
             return false;
@@ -44,7 +43,7 @@ public class Day4 : IDay
         {
             for (var x = 0; x < 5; x++)
             {
-                if (Numbers[0, x].Marked && Numbers[1, x].Marked && Numbers[2, x].Marked && Numbers[3, x].Marked && Numbers[4, x].Marked)
+                if (_numbers[0, x].Marked && _numbers[1, x].Marked && _numbers[2, x].Marked && _numbers[3, x].Marked && _numbers[4, x].Marked)
                     return true;
             }
             return false;
@@ -52,7 +51,7 @@ public class Day4 : IDay
 
         public bool Mark(int value)
         {
-            foreach (var number in Numbers)
+            foreach (var number in _numbers)
             {
                 if (number.Value == value)
                 {
@@ -66,7 +65,7 @@ public class Day4 : IDay
         public int SumUnmarked()
         {
             var sum = 0;
-            foreach (var num in Numbers)
+            foreach (var num in _numbers)
             {
                 if (!num.Marked)
                     sum += num.Value;
@@ -132,7 +131,7 @@ public class Day4 : IDay
             }
         }
 
-        var lastBoard = winningBoards.Last();
-        return lastBoard.board.SumUnmarked() * lastBoard.call;
+        var (board1, i) = winningBoards.Last();
+        return board1.SumUnmarked() * i;
     }
 }
