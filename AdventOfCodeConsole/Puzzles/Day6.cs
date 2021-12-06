@@ -6,7 +6,6 @@ public class Day6 : IDay
     {
         var hitZero = false;
 
-
         int prevGenZero = 0;
         for (int day = 0; day < days; day++)
         {
@@ -20,14 +19,14 @@ public class Day6 : IDay
             {
                 generation[counter] = generation[counter + 1];
             }
+            generation[^1] = 0;
 
             if (hitZero)
             {
-                generation[6] = prevGenZero;
-                generation[8] = prevGenZero;
+                generation[6] += prevGenZero;
+                generation[8] += prevGenZero;
                 hitZero = false;
             }
-
         }
     }
 
@@ -35,17 +34,17 @@ public class Day6 : IDay
     {
         //The key is to not store all the timers, but a counter for each current timer
         //That is, 500 lanternfish at timer 0, 1000 at timer 1, 1500 at timer 2, etc
-        var initialFish = input.Split(',').Select(byte.Parse);
+        var counters = input.Split(',').Select(byte.Parse);
 
-        int[] firstGeneration = new int[9];
-        foreach (var fish in initialFish)
+        int[] generations = new int[9];
+        foreach (var fish in counters)
         {
-            firstGeneration[fish] += 1;
+            generations[fish] += 1;
         }
 
-        MakeGenerations(days, firstGeneration);
+        MakeGenerations(days, generations);
 
-        return firstGeneration.Sum();
+        return generations.Sum();
     }
 
     public long Part1(string input)
@@ -55,6 +54,7 @@ public class Day6 : IDay
 
     public long Part2(string input)
     {
-        return CalculateFish(input, 256);
+        //return CalculateFish(input, 256);
+        return 0;
     }
 }
