@@ -34,7 +34,7 @@ public class DayRunnerBase<T> where T: IDay, new()
     [GlobalSetup]
     public async Task Setup()
     {
-        _input = await AdventOfCode.GetInputForDay(_dayNumber);
+        _input = await InputReader.GetInputForDay(_dayNumber);
     }
 
     [GlobalCleanup]

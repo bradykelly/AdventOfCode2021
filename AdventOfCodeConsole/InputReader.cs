@@ -2,7 +2,7 @@
 
 namespace AdventOfCodeConsole;
 
-internal static class AdventOfCode
+internal static class InputReader
 {
     internal static async Task<string?> GetInputForDay(int day)
     {
@@ -30,5 +30,11 @@ internal static class AdventOfCode
         }
 
         return input;
+    }
+
+    internal static async Task<string[]> GetLinesForDay(int day)
+    {
+        var input = await GetInputForDay(day);
+        return input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
     }
 }
