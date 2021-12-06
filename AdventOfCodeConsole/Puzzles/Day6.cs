@@ -1,12 +1,14 @@
-﻿namespace AdventOfCodeConsole.Puzzles;
+﻿using Microsoft.Diagnostics.Runtime.ICorDebug;
+
+namespace AdventOfCodeConsole.Puzzles;
 
 public class Day6 : IDay
 {
-    private void MakeGenerations(int days, int[] generation)
+    private void MakeGenerations(int days, long[] generation)
     {
         var hitZero = false;
 
-        int prevGenZero = 0;
+        long prevGenZero = 0;
         for (int day = 0; day < days; day++)
         {
             if (generation[0] >= 1)
@@ -36,15 +38,15 @@ public class Day6 : IDay
         //That is, 500 lanternfish at timer 0, 1000 at timer 1, 1500 at timer 2, etc
         var counters = input.Split(',').Select(byte.Parse);
 
-        int[] generations = new int[9];
+        long[] counts = new long[9];
         foreach (var fish in counters)
         {
-            generations[fish] += 1;
+            counts[fish] += 1;
         }
 
-        MakeGenerations(days, generations);
+        MakeGenerations(days, counts);
 
-        return generations.Sum();
+        return counts.Sum();
     }
 
     public long Part1(string input)
@@ -54,7 +56,6 @@ public class Day6 : IDay
 
     public long Part2(string input)
     {
-        //return CalculateFish(input, 256);
-        return 0;
+        return CalculateFish(input, 256);
     }
 }
