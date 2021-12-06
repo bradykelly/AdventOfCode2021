@@ -13,13 +13,14 @@ public class DayRunnerBase<T> where T: IDay, new()
     private int _output2;
     private T _day;
 
-    public DayRunnerBase()
+    public DayRunnerBase(int dayNumber)
     {
         //var genType = this.GetType().BaseType;
         //var paramTypeName = genType.GetGenericArguments()[0].Name;
         //if (int.TryParse(paramTypeName.Replace("Day", ""), out var dayNumber))
         //    _dayNumber = dayNumber;
-        //_day = new T();
+        _day = new T();
+        _dayNumber = dayNumber;
     }
 
     public async Task Run()
