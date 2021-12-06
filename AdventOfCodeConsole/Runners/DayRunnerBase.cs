@@ -1,16 +1,17 @@
 ﻿using AdventOfCodeConsole.Puzzles;
+using AdventOfCodeConsole.Tools;
 using BenchmarkDotNet.Attributes;
 
 namespace AdventOfCodeConsole.Runners;
 
 [MemoryDiagnoser(false)]
-[SimpleJob(launchCount: 10, warmupCount: 50, targetCount: 50)]
+[SimpleJob(launchCount: 1, warmupCount: 5, targetCount: 5)]
 public class DayRunnerBase<T> where T: IDay, new() 
 {
     private readonly int _dayNumber;
     private string? _input;
-    private int _output1;
-    private int _output2;
+    private long _output1;
+    private long _output2;
     private T _day;
 
     public DayRunnerBase(int dayNumber)

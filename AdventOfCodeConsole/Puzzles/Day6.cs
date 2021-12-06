@@ -1,51 +1,60 @@
-﻿using System.Collections.Immutable;
-
-namespace AdventOfCodeConsole.Puzzles;
+﻿namespace AdventOfCodeConsole.Puzzles;
 
 public class Day6 : IDay
 {
-    private Span<int> NextGeneration(Span<int> timers)
+    private void MakeGenerations(int days, int[] generation)
     {
-        var newTimers = 0;
-        var nextGenTimers = new List<int>();
+        var hitZero = false;
 
-        foreach (var timer in timers)
+
+        int prevGenZero = 0;
+        for (int day = 0; day < days; day++)
         {
-            int nextDay;
-            if (timer == 0)
+            if (generation[0] >= 1)
             {
-                nextDay = 6;
-                newTimers++;
-            }
-            else
-            {
-                nextDay = timer - 1;
+                hitZero = true;
             }
 
-            nextGenTimers.Add(nextDay);
-        }
+            prevGenZero = generation[0];
+            for (var counter = 0; counter < generation.Length - 1; counter++)
+            {
+                generation[counter] = generation[counter + 1];
+            }
 
-        for (var i = 0; i < newTimers; i++)
-        {
-            nextGenTimers.Add(8);
-        }
+            if (hitZero)
+            {
+                generation[6] = prevGenZero;
+                generation[8] = prevGenZero;
+                hitZero = false;
+            }
 
-        return nextGenTimers.ToArray().AsSpan();
+        }
     }
 
-    public int Part1(string input)
+    private long CalculateFish(string input, int days)
     {
-        var generation = input.Split(',').Select(int.Parse).ToArray().AsSpan();
-        for (var day = 0; day < 80; day++)
+        //The key is to not store all the timers, but a counter for each current timer
+        //That is, 500 lanternfish at timer 0, 1000 at timer 1, 1500 at timer 2, etc
+        var initialFish = input.Split(',').Select(byte.Parse);
+
+        int[] firstGeneration = new int[9];
+        foreach (var fish in initialFish)
         {
-            generation = NextGeneration(generation);
+            firstGeneration[fish] += 1;
         }
 
-        return generation.Length;
+        MakeGenerations(days, firstGeneration);
+
+        return firstGeneration.Sum();
     }
 
-    public int Part2(string input)
+    public long Part1(string input)
     {
-        return 0;
+        return CalculateFish(input, 80);
+    }
+
+    public long Part2(string input)
+    {
+        return CalculateFish(input, 256);
     }
 }

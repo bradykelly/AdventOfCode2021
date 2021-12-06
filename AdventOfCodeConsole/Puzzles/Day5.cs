@@ -157,7 +157,7 @@ public class Day5 : IDay
 
     }
 
-    public int Part1(string input)
+    public long Part1(string input)
     {
         var lines = ParsePointsAndLines(input);
 
@@ -175,7 +175,7 @@ public class Day5 : IDay
         return pointCounts.Values.Count(v => v >= 2);
     }
 
-    public int Part2(string input)
+    public long Part2(string input)
     {
         var lines = ParsePointsAndLines(input);
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Immutable;
 using System.Net;
 
-namespace AdventOfCodeConsole;
+namespace AdventOfCodeConsole.Tools;
 
 internal static class InputReader
 {

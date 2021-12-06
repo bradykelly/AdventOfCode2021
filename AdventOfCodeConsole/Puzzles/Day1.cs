@@ -10,7 +10,7 @@
                 .ToArray();
         }
 
-        public int Part1(string? input)
+        public long Part1(string? input)
         {
             var depths = GetIntsFromInput(input);
             return depths
@@ -18,7 +18,7 @@
                 .Count(b => b);
         }
 
-        public int Part2(string? input)
+        public long Part2(string? input)
         {
             var depths = GetIntsFromInput(input);
 

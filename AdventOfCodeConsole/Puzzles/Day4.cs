@@ -75,7 +75,7 @@ public class Day4 : IDay
         }
     }
 
-    public int Part1(string input)
+    public long Part1(string input)
     {
         var inputLines = input.Split('\n');
 
@@ -102,7 +102,7 @@ public class Day4 : IDay
         return 0;
     }
 
-    public int Part2(string input)
+    public long Part2(string input)
     {
         var inputLines = input.Split('\n');
 

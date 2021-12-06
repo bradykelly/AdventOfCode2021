@@ -2,7 +2,7 @@
 
 public class Day2: IDay
 {
-    public int Part1(string? input)
+    public long Part1(string? input)
     {
         var (horizontal, vertical) = (0, 0);
 
@@ -32,7 +32,7 @@ public class Day2: IDay
         return vertical * horizontal;
     }
 
-    public int Part2(string? input)
+    public long Part2(string? input)
     {
         var (horizontal, vertical) = (0, 0);
         var aim = 0;

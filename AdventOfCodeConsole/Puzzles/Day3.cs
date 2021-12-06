@@ -47,7 +47,7 @@ public class Day3 : IDay
         return count1 == count0 ? null : count1 > count0 ? '0' : '1';
     }
 
-    public int Part1(string input)
+    public long Part1(string input)
     {
         var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries).ToList();
         var lineLength = lines[0].Length;
@@ -70,7 +70,7 @@ public class Day3 : IDay
         return gamma * epsilon;
     }
 
-    public int Part2(string input)
+    public long Part2(string input)
     {
         var binaries = input.Split('\n', StringSplitOptions.RemoveEmptyEntries).ToList();
         var binaryLength = binaries[0].Length;
