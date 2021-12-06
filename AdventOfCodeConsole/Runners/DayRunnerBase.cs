@@ -1,7 +1,7 @@
 ﻿using AdventOfCodeConsole.Puzzles;
 using BenchmarkDotNet.Attributes;
 
-namespace AdventOfCodeConsole.Benchmarks;
+namespace AdventOfCodeConsole.Runners;
 
 [MemoryDiagnoser(false)]
 [SimpleJob(launchCount: 10, warmupCount: 50, targetCount: 50)]

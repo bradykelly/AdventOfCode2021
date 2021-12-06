@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Collections.Immutable;
+using System.Net;
 
 namespace AdventOfCodeConsole;
 
@@ -32,9 +33,14 @@ internal static class InputReader
         return input;
     }
 
-    internal static async Task<string[]> GetLinesForDay(int day)
+    internal static async Task<ImmutableArray<string>> GetLinesForDay(int day)
     {
         var input = await GetInputForDay(day);
-        return input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+        return input.Split('\n', StringSplitOptions.RemoveEmptyEntries).ToImmutableArray();
+    }
+
+    internal static ReadOnlySpan<int> GetIntsFromLine(string line)
+    {
+        return line.Split(',').Select(int.Parse).ToImmutableArray().AsSpan();
     }
 }

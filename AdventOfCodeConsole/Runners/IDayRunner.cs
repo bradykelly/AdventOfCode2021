@@ -1,4 +1,4 @@
-﻿namespace AdventOfCodeConsole.Benchmarks;
+﻿namespace AdventOfCodeConsole.Runners;
 
 public interface IDayRunner
 {

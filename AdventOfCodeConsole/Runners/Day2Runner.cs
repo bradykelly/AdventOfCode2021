@@ -1,7 +1,6 @@
 ﻿using AdventOfCodeConsole.Puzzles;
-using BenchmarkDotNet.Attributes;
 
-namespace AdventOfCodeConsole.Benchmarks;
+namespace AdventOfCodeConsole.Runners;
 
 public class Day2Runner : DayRunnerBase<Day2>
 {
