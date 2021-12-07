@@ -2,9 +2,9 @@
 
 namespace AdventOfCodeConsole.Runners;
 
-public class Day5Runner : DayRunnerBase<Day5>
+public class Day7Runner : DayRunnerBase<Day7>
 {
-    public Day5Runner() : base(5)
+    public Day7Runner() : base(7)
     {
     }
 }
