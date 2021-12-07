@@ -9,19 +9,21 @@ namespace AdventOfCodeConsole.Runners;
 public class DayRunnerBase<T> where T: IDay, new() 
 {
     private readonly int _dayNumber;
+    private readonly int _year;
     private string? _input;
     private long _output1;
     private long _output2;
     private T _day;
 
-    public DayRunnerBase(int dayNumber)
+    public DayRunnerBase(int day, int year=2021)
     {
         //var genType = this.GetType().BaseType;
         //var paramTypeName = genType.GetGenericArguments()[0].Name;
         //if (int.TryParse(paramTypeName.Replace("Day", ""), out var dayNumber))
         //    _dayNumber = dayNumber;
         _day = new T();
-        _dayNumber = dayNumber;
+        _dayNumber = day;
+        _year = year;
     }
 
     public async Task Run()
@@ -35,7 +37,7 @@ public class DayRunnerBase<T> where T: IDay, new()
     [GlobalSetup]
     public async Task Setup()
     {
-        _input = await InputReader.GetInputForDay(_dayNumber);
+        _input = await InputReader.GetInputForDay(_dayNumber, _year);
     }
 
     [GlobalCleanup]

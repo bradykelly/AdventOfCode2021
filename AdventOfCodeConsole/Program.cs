@@ -5,5 +5,5 @@ using BenchmarkDotNet.Running;
 #if !DEBUG
     BenchmarkRunner.Run<Day7Runner>();
 #else
-    await new Day7Runner().Run();
+    await new AdventOfCodeConsole.Runners._2020.Day4Runner().Run();
 #endif

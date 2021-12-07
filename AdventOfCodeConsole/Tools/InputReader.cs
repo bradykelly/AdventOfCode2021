@@ -5,14 +5,14 @@ namespace AdventOfCodeConsole.Tools;
 
 internal static class InputReader
 {
-    internal static async Task<string?> GetInputForDay(int day)
+    internal static async Task<string?> GetInputForDay(int day, int year = 2021)
     {
         string? input;
 
-        var filename = $"Day_{day}_Input.txt";
+        var filename = $"{year}_{day}_Input.txt";
         if (!File.Exists(filename))
         {
-            string url = $"https://adventofcode.com/2021/day/{day}/input";
+            var url = $"https://adventofcode.com/{year}/day/{day}/input";
             var cookies = new CookieContainer();
             cookies.Add(new Cookie()
             {
