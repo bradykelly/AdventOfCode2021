@@ -1,6 +1,4 @@
-﻿using System.Collections.Immutable;
-
-namespace AdventOfCodeConsole.Puzzles;
+﻿namespace AdventOfCodeConsole.Puzzles._2021;
 
 public class Day6 : IDay
 {

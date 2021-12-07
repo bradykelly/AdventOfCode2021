@@ -1,7 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace AdventOfCodeConsole.Puzzles;
+namespace AdventOfCodeConsole.Puzzles._2021;
 
 public class Day3 : IDay
 {

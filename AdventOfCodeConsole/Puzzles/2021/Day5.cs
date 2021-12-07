@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
-using System.Linq;
 
-namespace AdventOfCodeConsole.Puzzles;
+namespace AdventOfCodeConsole.Puzzles._2021;
 
 public class Day5 : IDay
 {

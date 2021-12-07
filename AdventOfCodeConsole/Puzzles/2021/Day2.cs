@@ -1,4 +1,4 @@
-﻿namespace AdventOfCodeConsole.Puzzles;
+﻿namespace AdventOfCodeConsole.Puzzles._2021;
 
 public class Day2: IDay
 {
