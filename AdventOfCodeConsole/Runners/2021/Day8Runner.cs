@@ -1,4 +1,6 @@
-﻿namespace AdventOfCodeConsole.Runners._2021;
+﻿using AdventOfCodeConsole.Puzzles._2021;
+
+namespace AdventOfCodeConsole.Runners._2021;
 
 public class Day8Runner : DayRunnerBase<Day8>
 {

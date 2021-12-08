@@ -3,7 +3,7 @@ using AdventOfCodeConsole.Runners._2021;
 using BenchmarkDotNet.Running;
 
 #if !DEBUG
-    BenchmarkRunner.Run<Day7Runner>();
+    BenchmarkRunner.Run<Day8Runner>();
 #else
-    await new AdventOfCodeConsole.Runners._2020.Day4Runner().Run();
+    await new Day8Runner().Run();
 #endif
