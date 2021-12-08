@@ -1,4 +1,5 @@
-﻿using BenchmarkDotNet.Validators;
+﻿using System.Text.RegularExpressions;
+using BenchmarkDotNet.Validators;
 
 namespace AdventOfCodeConsole.Puzzles._2020;
 
@@ -80,18 +81,19 @@ public class Day4 : IDay
                             valid = false;
                         break;
                     case "hgt":
-                        if (!value.EndsWith("cm") && !value.StartsWith("in"))
+                        var rx1 = new Regex(@"(^\d{3})(cm)\b|(^\d{2})(in)");
+                        var mx1 = rx1.Match(value);
+                        if (!mx1.Success || mx1.Groups.Count != 2)
                         {
                             valid = false;
                             break;
                         }
-                        if (value.EndsWith("cm"))
-                            if (!int.TryParse(value.Replace("cm", ""), out var heightcm) || heightcm is < 150 or > 193)
+                        if (mx1.Groups[1].Value == "cm")
+                            if (!int.TryParse(mx1.Groups[0].Value, out var h) && h is < 150 or > 193)
                                 valid = false;
-                        if (value.EndsWith("in"))
-                            if (!int.TryParse(value.Replace("in", ""), out var heightin) || heightin is < 59 or > 76)
+                        if (mx1.Groups[1].Value == "in")
+                            if (!int.TryParse(mx1.Groups[0].Value, out var h) && h is < 59 or > 76)
                                 valid = false;
-                        valid = false;
                         break;
                     case "hcl":
                         break;
