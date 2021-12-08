@@ -1,33 +1,37 @@
-﻿using Microsoft.Diagnostics.Tracing.Parsers.AspNet;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace AdventOfCodeConsole.Puzzles._2021
 {
     public class Day8 : IDay
     {
-        private int GetRow(string directions, int dirIndex, (int start, int end) half)
+        private Dictionary<int, string> _uniqueDigits = new();
+
+        public Day8()
         {
-            var halfOfHalf = (half.end - half.start + 1) / 2;
-            if (dirIndex == directions.Length - 1)
-            {
-                return half.start;
-            }
-            var dir = directions[dirIndex];
-            (int start, int end) nextHalf = dir switch
-            {
-                'F' => (half.start, half.start + halfOfHalf - 1),
-                'B' => (half.start + halfOfHalf, half.end)
-            };
-            return GetRow(directions, dirIndex + 1, nextHalf);
+            _uniqueDigits.Add(1, "cf");
+            _uniqueDigits.Add(4, "bcdf");
+            _uniqueDigits.Add(7, "acf");
+            _uniqueDigits.Add(8, "abcdefg");
         }
 
         public long Part1(string input)
         {
-            var passes = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+            var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+            var uniqueLengths = _uniqueDigits.Select(kv => kv.Value.Length);
 
-            var pass = "FBFBBFFRLR";
-            var row = GetRow(pass.Substring(0, 7), 0, (0, 127));
+            var totalUniques = 0;
+            foreach (var line in lines)
+            {
+                var output = line.Split('|', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)[1];
+                var uniquesInOutput = output.Split(" ").Count(od => uniqueLengths.Contains(od.Length));
+                totalUniques += uniquesInOutput;
+            }
 
-            return 0;
+            return totalUniques;
         }
 
         public long Part2(string input)
