@@ -1,5 +1,5 @@
-﻿using System.Reflection;
-using AdventOfCodeConsole.Tools;
+﻿using AdventOfCodeConsole.Tools;
+using System.Diagnostics;
 
 namespace AdventOfCodeConsole.Puzzles._2021;
 
@@ -24,12 +24,12 @@ public class Day9 : IDay
         return heatMap;
     }
 
-    private static List<(int y, int x)> GetLowPoints(int[,] heatMap)
+    private static List<Point> GetLowPoints(int[,] heatMap)
     {
         var rowCount = heatMap.GetLength(0);
         var colCount = heatMap.GetLength(1);
 
-        var lowPoints = new List<(int y, int x)>();
+        var lowPoints = new List<Point>();
         for (var y = 0; y < rowCount; y++)
         {
             for (var x = 0; x < colCount; x++)
@@ -49,7 +49,7 @@ public class Day9 : IDay
 
                 if (isLow)
                 {
-                    lowPoints.Add((y, x));
+                    lowPoints.Add(new Point(y, x));
                 }
             }
         }
@@ -59,6 +59,10 @@ public class Day9 : IDay
 
     private bool PointInBasin(Point point, List<List<Point>> basins)
     {
+        foreach (var basin in basins)
+            foreach (var bp in basin)
+                if (bp.Y == point.Y && bp.X == point.X)
+                    return true;
         return false;
     }
 
@@ -66,14 +70,14 @@ public class Day9 : IDay
     {
         var basinPoints = new List<Point>();
 
-        //foreach (var adj in EnumerableMatrixFunctions.AdjacentElements(array, point.Y, point.X))
-        //{
-        //    if (array[adj.Y, adj.X] == 9 || array[adj.Y, adj.X] < array[point.Y, point.X] || PointInBasin(adj, basins))
-        //        return basinPoints;
-            
-        //    var points = GetBasinPoints(array, point, basins);
-        //    basinPoints.AddRange(points);
-        //}
+        foreach (var adj in GridMethods.NeighbouringPoints(array, point.Y, point.X))
+        {
+            if (array[adj.Y, adj.X] == 9 || array[adj.Y, adj.X] > array[point.Y, point.X] || PointInBasin(adj, basins))
+                continue;
+
+            var points = GetBasinPoints(array, point, basins);
+            basinPoints.AddRange(points);
+        }
 
         return basinPoints;
     }
@@ -87,7 +91,7 @@ public class Day9 : IDay
 
         foreach (var point in lows)
         {
-            bigTotal += heatMap[point.y, point.x] + 1;
+            bigTotal += heatMap[point.Y, point.X] + 1;
         }
         return bigTotal;
     }
@@ -96,14 +100,15 @@ public class Day9 : IDay
     {
         var bigTotal = 0;
 
-        //var heatMap = GetHeatMap(input);
-        //var basins = new List<List<Point>>();
+        var heatMap = GetHeatMap(input);
+        var basins = new List<List<Point>>();
 
-        //foreach (var lowPoint in GetLowPoints(heatMap))
-        //{
-        //    var basinPoints = GetBasinPoints(heatMap, lowPoint, basins);
-        //    basins.Add(basinPoints);
-        //}
+        foreach (var lowPoint in GetLowPoints(heatMap))
+        {
+            var basinPoints = GetBasinPoints(heatMap, lowPoint, basins);
+            if (basinPoints.Count > 0)
+                basins.Add(basinPoints);
+        }
 
         return bigTotal;
     }
