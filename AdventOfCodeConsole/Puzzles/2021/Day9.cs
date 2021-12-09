@@ -35,12 +35,12 @@ public class Day9 : IDay
             for (var x = 0; x < colCount; x++)
             {
                 var pointHeight = heatMap[y, x];
-                var adjacents = GridMethods.AdjacentElements(heatMap, y, x).ToList();
+                var adjacents = GridMethods.AdjacentPoints(heatMap, y, x).ToList();
 
                 var isLow = true;
                 foreach (var adj in adjacents)
                 {
-                    if (adj <= pointHeight)
+                    if (heatMap[adj.Y, adj.X] <= pointHeight)
                     {
                         isLow = false;
                         break;

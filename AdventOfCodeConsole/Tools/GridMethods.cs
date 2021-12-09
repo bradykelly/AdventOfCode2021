@@ -9,7 +9,7 @@ namespace AdventOfCodeConsole.Tools
 {
     public class GridMethods
     {
-        public static IEnumerable<Point> AdjacentElements(int[,] array, int row, int column)
+        public static IEnumerable<Point> AdjacentPoints(int[,] array, int row, int column)
         {
             int rows = array.GetLength(0);
             int columns = array.GetLength(1);
@@ -23,8 +23,6 @@ namespace AdventOfCodeConsole.Tools
                         && !(y == row - 1 && x == column + 1)
                         && !(y == row + 1 && x == column - 1))
                     {
-                        if (y == 0)
-                            Debug.Fail("Y is 6");
                         yield return new Point(y, x);
                     }
         }

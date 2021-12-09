@@ -6,7 +6,7 @@ public class Point
     public int Y;
     public int X;
 
-    public Point(int x, int y)
+    public Point(int y, int x)
     {
         Y = y;
         X = x;
