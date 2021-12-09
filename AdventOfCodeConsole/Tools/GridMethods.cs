@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace AdventOfCodeConsole.Tools
 {
-    public class EnumerableMatrixFunctions
+    public class GridMethods
     {
-        public static IEnumerable<T> AdjacentElementsOrthogonal<T>(T[,] array, int row, int column)
+        public static IEnumerable<T> AdjacentElements<T>(T[,] array, int row, int column)
         {
             int rows = array.GetLength(0);
             int columns = array.GetLength(1);
@@ -24,7 +24,7 @@ namespace AdventOfCodeConsole.Tools
                         yield return array[y, x];
         }
 
-        public static IEnumerable<T> AdjacentElements<T>(T[,] array, int row, int column)
+        public static IEnumerable<T> NeighbouringElements<T>(T[,] array, int row, int column)
         {
             int rows = array.GetLength(0);
             int columns = array.GetLength(1);
