@@ -57,7 +57,7 @@ public class Day9 : IDay
         return lowPoints;
     }
 
-    private bool PointInBasin(Point point, List<List<Point>> basins)
+    private bool PointInBasin(Point point)
     {
         foreach (var basin in basins)
             foreach (var bp in basin)
@@ -66,16 +66,20 @@ public class Day9 : IDay
         return false;
     }
 
-    private List<Point> GetBasinPoints(int[,] array, Point point, List<List<Point>> basins)
+    private List<List<Point>> basins = new List<List<Point>>();
+
+    private List<Point> GetBasinPoints(int[,] array, Point point)
     {
         var basinPoints = new List<Point>();
 
-        foreach (var adj in GridMethods.NeighbouringPoints(array, point.Y, point.X))
+        var neighbours = GridMethods.AdjacentPoints(array, point.Y, point.X).ToList();
+        foreach (var adj in neighbours)
         {
-            if (array[adj.Y, adj.X] == 9 || array[adj.Y, adj.X] > array[point.Y, point.X] || PointInBasin(adj, basins))
+            if (array[adj.Y, adj.X] == 9 || array[adj.Y, adj.X] < array[point.Y, point.X] || PointInBasin(adj))
                 continue;
 
-            var points = GetBasinPoints(array, point, basins);
+            basinPoints.Add(adj);
+            var points = GetBasinPoints(array, adj);
             basinPoints.AddRange(points);
         }
 
@@ -101,11 +105,11 @@ public class Day9 : IDay
         var bigTotal = 0;
 
         var heatMap = GetHeatMap(input);
-        var basins = new List<List<Point>>();
 
         foreach (var lowPoint in GetLowPoints(heatMap))
         {
-            var basinPoints = GetBasinPoints(heatMap, lowPoint, basins);
+            basins.Add(new List<Point> { lowPoint });
+            var basinPoints = GetBasinPoints(heatMap, lowPoint);
             if (basinPoints.Count > 0)
                 basins.Add(basinPoints);
         }
