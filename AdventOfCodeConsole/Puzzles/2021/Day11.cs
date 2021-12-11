@@ -41,9 +41,9 @@ namespace AdventOfCodeConsole.Puzzles._2021
 
         private class Octopus
         {
-            private int Y { get; }
+            public int Y { get; }
 
-            private int X { get; }
+            public int X { get; }
 
             public int Energy { get; set; }
 
@@ -58,7 +58,7 @@ namespace AdventOfCodeConsole.Puzzles._2021
                 Energy = energy;
             }
 
-            private IEnumerable<Octopus> NeighbouringOctopuses(Octopus[,] array, int row, int column)
+            public static IEnumerable<Octopus> NeighbouringOctopuses(Octopus[,] array, int row, int column)
             {
                 int rows = array.GetLength(0);
                 int columns = array.GetLength(1);
@@ -107,14 +107,14 @@ namespace AdventOfCodeConsole.Puzzles._2021
             {
                 if (HasFlashed) return;
 
-                HasFlashed = true;
                 var neighbours = NeighbouringOctopuses(_octoGrid, Y, X);
                 foreach(var neighbour in neighbours)
                 {
                     neighbour.Energy++;
-                }  
-                
-                foreach(var neighbour in neighbours)
+                }
+
+                HasFlashed = true;
+                foreach (var neighbour in neighbours)
                 {
                     if (neighbour.Energy > 9)
                     {
@@ -147,10 +147,27 @@ namespace AdventOfCodeConsole.Puzzles._2021
                     for (int x = 0; x < _octoGrid.GetLength(1); x++)
                     {
                         var octo = _octoGrid[y, x];
-                        if (octo.Energy > 9)
+                        if (octo.Energy > 9 && !octo.HasFlashed)
                         {
-                            octo.Flash();
+                            var neighbours = Octopus.NeighbouringOctopuses(_octoGrid, octo.Y, octo.X);
+                            foreach (var neighbour in neighbours)
+                            {
+                                neighbour.Energy++;
+                            }
+                            octo.HasFlashed = true;
+                        }
+                    }
+                }
+
+                for (int y = 0; y < _octoGrid.GetLength(0); y++)
+                {
+                    for (int x = 0; x < _octoGrid.GetLength(1); x++)
+                    {
+                        var octo = _octoGrid[y, x];
+                        if (octo.HasFlashed)
+                        {
                             octo.Energy = 0;
+                            octo.HasFlashed = false;
                         }
                     }
                 }
