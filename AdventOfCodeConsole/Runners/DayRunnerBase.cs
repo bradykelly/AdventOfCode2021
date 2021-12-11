@@ -32,6 +32,7 @@ public class DayRunnerBase<T> where T: IDay, new()
         Part1();
         Part2();
         ShowResults();
+        Console.ReadLine();
     }
 
     [GlobalSetup]
