@@ -131,7 +131,7 @@ namespace AdventOfCodeConsole.Puzzles._2021
 
             BuildOctoGrid(input);
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 100; i++)
             {
                 for (int y = 0; y < _octoGrid.GetLength(0); y++)
                 {
@@ -147,7 +147,7 @@ namespace AdventOfCodeConsole.Puzzles._2021
                     for (int x = 0; x < _octoGrid.GetLength(1); x++)
                     {
                         var octo = _octoGrid[y, x];
-                        if (octo.Energy > 9 && !octo.HasFlashed)
+                        if (octo.Energy > 9)
                         {
                             var neighbours = Octopus.NeighbouringOctopuses(_octoGrid, octo.Y, octo.X);
                             foreach (var neighbour in neighbours)
@@ -164,8 +164,9 @@ namespace AdventOfCodeConsole.Puzzles._2021
                     for (int x = 0; x < _octoGrid.GetLength(1); x++)
                     {
                         var octo = _octoGrid[y, x];
-                        if (octo.HasFlashed)
+                        if (octo.Energy > 9)
                         {
+                            bigScore++;
                             octo.Energy = 0;
                             octo.HasFlashed = false;
                         }
