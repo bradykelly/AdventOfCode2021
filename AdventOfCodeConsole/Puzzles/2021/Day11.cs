@@ -139,20 +139,16 @@ namespace AdventOfCodeConsole.Puzzles._2021
                     {
                         var octo = _octoGrid[y, x];
                         octo.Energy = octo.Energy + 1;
-                    }
-                }
-
-                for (int y = 0; y < _octoGrid.GetLength(0); y++)
-                {
-                    for (int x = 0; x < _octoGrid.GetLength(1); x++)
-                    {
-                        var octo = _octoGrid[y, x];
                         if (octo.Energy > 9)
                         {
                             var neighbours = Octopus.NeighbouringOctopuses(_octoGrid, octo.Y, octo.X);
                             foreach (var neighbour in neighbours)
                             {
                                 neighbour.Energy++;
+                                if (neighbour.Energy > 9)
+                                {
+                                    bigScore++;
+                                }
                             }
                             octo.HasFlashed = true;
                         }
