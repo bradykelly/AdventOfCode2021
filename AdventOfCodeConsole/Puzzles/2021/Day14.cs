@@ -7,42 +7,52 @@ public class Day14 : IDay
     public long Part1(string input)
     {
         var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+        var rules = lines[1..];
 
-        var origPolymer = lines[0].ToArray();
-        var rules = lines[1..^1];
-        var workingPolymer = new StringBuilder();
+        var workingPolymer = new StringBuilder(lines[0]);
 
-        // Find overlapping pairs.
-        var pairs = new List<string>();
-        for (var i = 0; i < origPolymer.Length - 1; i++)
+        for (int s = 0; s < 10; s++)
         {
-            pairs.Add(new string(new[] { origPolymer[i], origPolymer[i + 1] }));
-        }
+            // Start on our new polymer
+            var startPolymer = workingPolymer.ToString();
+            workingPolymer = new StringBuilder();
 
-        var threes = new List<string>();
-        foreach (var pair in pairs)
-        {
-            var ruleSplit = rules.SingleOrDefault(r => r.StartsWith(pair))?.Split(" -> ");
-            if (ruleSplit != null)
+            // Find overlapping pairs.
+            var pairs = new List<string>();
+            for (var i = 0; i < startPolymer.Length - 1; i++)
             {
-                threes.Add(pair[0] + ruleSplit[1] + pair[1]);
+                pairs.Add(new string(new[] { startPolymer[i], startPolymer[i + 1] }));
+            }
+
+            // Insert rule chars into pairs
+            var threes = new List<string>();
+            foreach (var pair in pairs)
+            {
+                var ruleSplit = rules.SingleOrDefault(r => r.StartsWith(pair))?.Split(" -> ");
+                if (ruleSplit != null)
+                {
+                    threes.Add(pair[0] + ruleSplit[1] + pair[1]);
+                }
+            }
+
+            for (int i = 0; i < threes.Count; i++)
+            {
+                if (i == 0)
+                {
+                    workingPolymer.Append(threes[i]);
+                }
+                else
+                {
+                    workingPolymer.Append(threes[i][1..]);
+                }
             }
         }
 
-        for (int i = 0; i < threes.Count; i++)
-        {
-            if (i == 0)
-            {
-                workingPolymer.Append(threes[i]);
-            }
-            else
-            {
-                workingPolymer.Append(threes[i][1..]);
-            }
-        }
+        Dictionary<char, int> counts = workingPolymer.ToString().GroupBy(x => x).ToDictionary(x => x.Key, x => x.Count());
+        var maxChar = counts.Where(x => x.Value == counts.Values.Max()).Select(x => x.Key).Single();
+        var minChar = counts.Where(x => x.Value == counts.Values.Min()).Select(x => x.Key).Single();
 
-
-        return 0;
+        return counts[maxChar] - counts[minChar];
     }
 
     public long Part2(string input)
@@ -50,3 +60,4 @@ public class Day14 : IDay
         return 0;
     }
 }
+
