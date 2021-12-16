@@ -2,6 +2,13 @@
 
 public interface IDay
 {
-    long Part1(string input);
-    long Part2(string input);
+    public long Part1(string input)
+    {
+        return 0;
+    }
+
+    long Part2(string input)
+    {
+        return 0;
+    }
 }
