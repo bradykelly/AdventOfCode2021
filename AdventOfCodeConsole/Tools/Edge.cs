@@ -11,4 +11,10 @@ public struct Edge
         Start = start;
         End = end;
     }
+
+    public Edge(string start, string end)
+    {
+        Start = new Node(start);
+        End = new Node(end);
+    }
 }
