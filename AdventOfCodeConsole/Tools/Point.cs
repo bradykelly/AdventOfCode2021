@@ -3,10 +3,14 @@
 namespace AdventOfCodeConsole.Tools;
 
 // BKTODO Make struct
-public class Point
+public record Point
 {
-    public int Y { get; }
-    public int X { get; }
+    public int Y { get; init; }
+    public int X { get; init; }
+
+    public Point()
+    {
+    }
 
     public Point(int y, int x)
     {

@@ -5,7 +5,7 @@ using AdventOfCodeConsole.Tools;
 using BenchmarkDotNet.Running;
 
 #if !DEBUG
-    BenchmarkRunner.Run<Day16Runner>();
+    BenchmarkRunner.Run<Day13Runner>();
 #else
-    await new Day16Runner().Run();
+    await new Day13Runner().Run();
 #endif

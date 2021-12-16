@@ -26,9 +26,7 @@
             public short Version { get; set; }
             public short Type { get; set; }
             public short LengthType { get; set; }
-            public int SubPacketsLength { get; set; }
-            public List<string> LiteralNybles { get; set; } = new List<string>();
-
+            public List<string> LiteralNybles { get; set; } = new();
             public string Padding { get; set; }
         }
 
