@@ -68,22 +68,17 @@ public class Day9 : IDay
 
     private List<List<Point>> basins = new List<List<Point>>();
 
-    private List<Point> GetBasinPoints(int[,] array, Point point)
+    private void GetBasinPoints(int[,] array, Point point, List<Point> basin)
     {
-        var basinPoints = new List<Point>();
-
         var neighbours = GridMethods.AdjacentPoints(array, point.Y, point.X).ToList();
         foreach (var adj in neighbours)
         {
-            if (array[adj.Y, adj.X] == 9 || array[adj.Y, adj.X] < array[point.Y, point.X] || PointInBasin(adj))
+            if (array[adj.Y, adj.X] == 9 || PointInBasin(adj))
                 continue;
 
-            basinPoints.Add(adj);
-            var points = GetBasinPoints(array, adj);
-            basinPoints.AddRange(points);
+            basin.Add(adj);
+            GetBasinPoints(array, adj, basin);
         }
-
-        return basinPoints;
     }
 
     public long Part1(string input)
@@ -108,12 +103,13 @@ public class Day9 : IDay
 
         foreach (var lowPoint in GetLowPoints(heatMap))
         {
-            basins.Add(new List<Point> { lowPoint });
-            var basinPoints = GetBasinPoints(heatMap, lowPoint);
-            if (basinPoints.Count > 0)
-                basins.Add(basinPoints);
+            var basin = new List<Point> { lowPoint };
+            basins.Add(basin);
+            GetBasinPoints(heatMap, lowPoint, basin);
         }
 
-        return bigTotal;
+        var largest = basins.OrderByDescending(b => b.Count).Take(3).ToList();
+
+        return largest[0].Count * largest[1].Count * largest[2].Count;
     }
 }

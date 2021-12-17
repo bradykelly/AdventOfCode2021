@@ -1,63 +1,96 @@
-﻿using System.Diagnostics;
+﻿namespace AdventOfCodeConsole.Puzzles._2021;
 
-namespace AdventOfCodeConsole.Puzzles._2021
+public class Day10 : IDay
 {
-    public class Day10 : IDay
+    private readonly Dictionary<char, int> _scores = new()
     {
-        private readonly Dictionary<char, int> _closing = new Dictionary<char, int>
+        { ')', 3 },
+        { ']', 57 },
+        { '}', 1197 },
+        { '>', 25137 }
+    };
+
+    private List<string> _corrupted = new();
+    public long Part1(string input)
+    {
+        Dictionary<char, char> _matches = new()
         {
-            { ')', 3 },
-            { ']', 57 },
-            { '}', 1197},
-            { '>', 25137}
+            { '(', ')' },
+            { '[', ']' },
+            { '{', '}' },
+            { '<', '>' }
         };
 
-        public long Part1(string input)
+        var totalScore = 0;
+        var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+        var stack = new Stack<char>();
+        foreach (var line in lines)
         {
-            var totalScore = 0;
-
-            var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
-
-            var stack = new Stack<char>();
-
-            foreach (var line in lines)
+            foreach (var ch in line)
             {
-                foreach (var ch in line)
+                if (_matches.ContainsKey(ch))
                 {
-                    if (ch is '(' or '[' or '{' or '<')
-                    {   
-                        stack.Push(ch);
-                    }
+                    stack.Push(ch);
+                }
+                else if (_matches.ContainsValue(ch))
+                {
+                    var sp = stack.Pop();
+                    if (ch == _matches[sp]) continue;
+                    totalScore += _scores[ch];
+                    _corrupted.Add(line);
+                    break;
+                }
+            }
+        }
 
-                    else
+        return totalScore;
+    }
+
+    public long Part2(string input)
+    {
+        Dictionary<char, char> _matches = new()
+        {
+            { ')', '(' },
+            { ']', '[' },
+            { '}', '{' },
+            { '>', '<' }
+        };
+
+        var totalScore = 0;
+        var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+        var stack = new Stack<char>();
+        foreach (var line in lines.Where(l => !_corrupted.Contains(l)))
+        {
+            foreach (var ch in line)
+            {
+                if (_matches.ContainsValue(ch))
+                {
+                    stack.Push(ch);
+                }
+                else
+                {
+                    var sp = stack.Pop();
+                    if (_matches[ch] != sp)
                     {
-                        var score = ch switch
-                        {
-                            ')' => 3,
-                            ']' => 57,
-                            '}' => 1197,
-                            '>' => 25137,
-                            _ => 0
-                        };
-                        if (score > 0)
-                        {
-                            var sp = stack.Pop();
-                            if (!(sp == '(' && ch == ')' || sp == '[' && ch == ']' || sp == '{' && ch == '}' || sp == '<' && ch == '>'))
-                            {
-                                totalScore += score;
-                                break;
-                            }
-                        }
+                        break;
                     }
                 }
             }
 
-            return totalScore;
+            var completion = "";
+            while (stack.TryPop(out var ch))
+            {
+                completion += ch switch
+                {
+                    '(' => ')',
+                    '[' => ']',
+                    '{' => '}',
+                    '<' => '>',
+                    _ => null
+                };
+            }
         }
 
-        public long Part2(string input)
-        {
-            return 0;
-        }
+        return totalScore;
     }
 }

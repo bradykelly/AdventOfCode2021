@@ -2,7 +2,6 @@
 
 namespace AdventOfCodeConsole.Tools;
 
-// BKTODO Make struct
 public record Point
 {
     public int Y { get; init; }
