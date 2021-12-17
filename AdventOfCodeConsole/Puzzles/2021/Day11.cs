@@ -91,19 +91,6 @@ public class Day11 : IDay
         }
     }
 
-    public ulong Part1(string input)
-    {
-        BuildGrid(input);
-
-        ulong flashCount = 0;
-        for (int i = 0; i < 100; i++)
-        {
-            flashCount += (ulong)Step();
-        }
-
-        return flashCount;
-    }
-
     private static int Step()
     {
         var count = 0;
@@ -132,9 +119,30 @@ public class Day11 : IDay
         return count;
     }
 
+    public ulong Part1(string input)
+    {
+        BuildGrid(input);
+
+        ulong flashCount = 0;
+        for (int i = 0; i < 100; i++)
+        {
+            flashCount += (ulong)Step();
+        }
+
+        return flashCount;
+    }
+
     public ulong Part2(string input)
     {
-        return 0;
+        BuildGrid(input);
+
+        for (int i = 1; ; i++)
+        {
+            if (Step() is 100)
+            {
+                return (ulong)i;
+            }
+        }
     }
 
 
