@@ -2,7 +2,7 @@
 
 public class Day13Runner : DayRunnerBase<Day13>
 {
-    public Day13Runner() : base(13)
+    public Day13Runner() 
     {
     }
 }

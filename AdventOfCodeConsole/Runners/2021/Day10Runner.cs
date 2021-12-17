@@ -9,7 +9,7 @@ namespace AdventOfCodeConsole.Runners._2021;
 
 public class Day10Runner : DayRunnerBase<Day10>
 {
-    public Day10Runner() : base(10)
+    public Day10Runner() 
     {
     }
 }

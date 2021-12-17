@@ -15,14 +15,14 @@ public class DayRunnerBase<T> where T: IDay, new()
     private ulong _output2;
     private T _day;
 
-    public DayRunnerBase(int day, int year=2021)
+    public DayRunnerBase(int year=2021)
     {
         //var genType = this.GetType().BaseType;
         //var paramTypeName = genType.GetGenericArguments()[0].Name;
         //if (int.TryParse(paramTypeName.Replace("Day", ""), out var dayNumber))
         //    _dayNumber = dayNumber;
         _day = new T();
-        _dayNumber = day;
+        _dayNumber = T.DayNumber;
         _year = year;
     }
 
