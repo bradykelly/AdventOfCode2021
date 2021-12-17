@@ -4,7 +4,7 @@ namespace AdventOfCodeConsole.Runners._2020;
 
 public class Day3Runner : DayRunnerBase<Day3>
 {
-    public Day3Runner() : base(3, 2020)
+    public Day3Runner() : base(2020)
     {
     }
 }

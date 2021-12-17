@@ -8,6 +8,8 @@ namespace AdventOfCodeConsole.Puzzles._2021;
 
 public class Day11 : IDay
 {
+    public static int DayNumber => 11;
+
     static Octopus[,] _octoGrid;
 
     public static void DebugGrid()
@@ -22,7 +24,7 @@ public class Day11 : IDay
         }
     }
 
-    private static void BuildOctoGrid(string input)
+    private static void BuildGrid(string input)
     {
         var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
         _octoGrid = new Octopus[lines.Length, lines[0].Length];
@@ -37,8 +39,6 @@ public class Day11 : IDay
         }
     }
 
-    private static int _flashCount = 0;
-
     private class Octopus
     {
         public int Y { get; }
@@ -47,10 +47,6 @@ public class Day11 : IDay
 
         public int Energy { get; set; }
 
-        public bool WasVisited { get; set; }
-
-        public bool HasFlashed { get; set; } = false;
-
         public Octopus(int y, int x, int energy)
         {
             Y = y;
@@ -58,7 +54,7 @@ public class Day11 : IDay
             Energy = energy;
         }
 
-        public static IEnumerable<Octopus> NeighbouringOctopuses(Octopus[,] array, int row, int column)
+        public static IEnumerable<Octopus> GetNeighbours(Octopus[,] array, int row, int column)
         {
             int rows = array.GetLength(0);
             int columns = array.GetLength(1);
@@ -77,47 +73,63 @@ public class Day11 : IDay
             return $"{Y},{X}: {Energy}";
         }
 
-        internal void Increment()
+        public int Flash(Octopus[,] grid)
         {
-            Energy++;
-            if (Energy > 9 && !HasFlashed) Flash();
-        }
+            var count = 1;
 
-        internal void Flash()
-        {
-            HasFlashed = true;
-            Energy = 0;
-            _flashCount += 1;
+            var neighbours = GetNeighbours(grid, this.Y, this.X);
+            foreach (var nb in neighbours)
+            {
+                nb.Energy++;
+                if (nb.Energy is 10)
+                {
+                    count += nb.Flash(grid);
+                }
+            }
+
+            return count;
         }
     }
 
-    public static int DayNumber => 11;
-
     public ulong Part1(string input)
     {
-        BuildOctoGrid(input);
+        BuildGrid(input);
 
+        ulong flashCount = 0;
         for (int i = 0; i < 100; i++)
         {
-            for (int y = 0; y < _octoGrid.GetLength(0); y++)
+            flashCount += (ulong)Step();
+        }
+
+        return flashCount;
+    }
+
+    private static int Step()
+    {
+        var count = 0;
+
+        for (int y = 0; y < _octoGrid.GetLength(0); y++)
+        {
+            for (int x = 0; x < _octoGrid.GetLength(1); x++)
             {
-                for (int x = 0; x < _octoGrid.GetLength(1); x++)
-                {
-                    var octo = _octoGrid[y, x];
-                    octo.Increment();
-                    if (octo.HasFlashed)
-                    {
-                        var neighbours = Octopus.NeighbouringOctopuses(_octoGrid, octo.Y, octo.X);
-                        foreach (var neighbour in neighbours.Where(n => !n.HasFlashed))
-                        {
-                            neighbour.Increment();
-                        }
-                    }
-                }
+                var octo = _octoGrid[y, x];
+                octo.Energy++;
+                if (octo.Energy is 10)
+                    count += octo.Flash(_octoGrid);
             }
         }
 
-        return (ulong)_flashCount;
+        for (int y = 0; y < _octoGrid.GetLength(0); y++)
+        {
+            for (int x = 0; x < _octoGrid.GetLength(1); x++)
+            {
+                var octo = _octoGrid[y, x];
+                if (octo.Energy > 9)
+                    octo.Energy = 0;
+            }
+        }
+
+        return count;
     }
 
     public ulong Part2(string input)
