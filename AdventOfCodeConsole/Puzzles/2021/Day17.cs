@@ -14,4 +14,5 @@
 
 public class Day17 : IDay
 {
+    public static int DayNumber => 17;
 }

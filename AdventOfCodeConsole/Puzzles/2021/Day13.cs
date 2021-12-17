@@ -58,6 +58,8 @@ public class Day13 : IDay
         points = points.Distinct().ToList();
     }
 
+    public static int DayNumber => 13;
+
     public ulong Part1(string input)
     {
         var points = GetPointsList(input);

@@ -4,6 +4,8 @@ namespace AdventOfCodeConsole.Puzzles._2021;
 
 public class Day1 : IDay
 {
+    public static int DayNumber => 1;
+
     public ulong Part1(string input)
     {
         var depths = InputReader.GetIntsFromCsvString(input);

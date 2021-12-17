@@ -8,6 +8,8 @@
             public int Right { get; init; }
         }
 
+        public static int DayNumber => 3;
+
         public ulong Part1(string input)
         {
             var rows = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);

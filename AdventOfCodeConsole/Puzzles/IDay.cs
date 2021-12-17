@@ -2,6 +2,8 @@
 
 public interface IDay
 {
+    public static abstract int DayNumber { get; }
+
     public ulong Part1(string input)
     {
         return 0;

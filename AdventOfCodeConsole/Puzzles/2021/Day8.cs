@@ -31,6 +31,8 @@ namespace AdventOfCodeConsole.Puzzles._2021
             _allDigits.Add("abcdfg", 9);
         }
 
+        public static int DayNumber => 8;
+
         public ulong Part1(string input)
         {
             var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);

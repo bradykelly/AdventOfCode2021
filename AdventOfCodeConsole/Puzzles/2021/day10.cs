@@ -3,6 +3,9 @@
 public class Day10 : IDay
 {
     private List<string> _corrupted = new();
+
+    public static int DayNumber => 10;
+
     public ulong Part1(string input)
     {
         Dictionary<char, char> _matches = new()

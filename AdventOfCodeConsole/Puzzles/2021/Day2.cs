@@ -2,6 +2,8 @@
 
 public class Day2: IDay
 {
+    public static int DayNumber => 2;
+
     public ulong Part1(string? input)
     {
         var (horizontal, vertical) = (0, 0);

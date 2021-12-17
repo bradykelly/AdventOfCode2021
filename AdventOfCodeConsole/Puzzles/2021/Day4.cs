@@ -75,6 +75,8 @@ public class Day4 : IDay
         }
     }
 
+    public static int DayNumber => 4;
+
     public ulong Part1(string input)
     {
         var inputLines = input.Split('\n');

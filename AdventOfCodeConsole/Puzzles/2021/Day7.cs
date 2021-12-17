@@ -9,6 +9,8 @@ public class Day7 : IDay
         return stepCount * (stepCount + 1) / 2;
     }
 
+    public static int DayNumber => 7;
+
     public ulong Part1(string input)
     {
         var horizontals = InputReader.GetIntsFromLine(input);

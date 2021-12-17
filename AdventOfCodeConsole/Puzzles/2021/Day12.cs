@@ -9,6 +9,8 @@ namespace AdventOfCodeConsole.Puzzles._2021
 {
     public class Day12: IDay
     {
+        public static int DayNumber => 12;
+
         public ulong Part1(string input)
         {
             var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);

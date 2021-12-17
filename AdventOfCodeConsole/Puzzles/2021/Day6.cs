@@ -44,6 +44,8 @@ public class Day6 : IDay
         return counts.Sum();
     }
 
+    public static int DayNumber => 6;
+
     public ulong Part1(string input)
     {
         return (ulong)CalculateFish(input, 80);

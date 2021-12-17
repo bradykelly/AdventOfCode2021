@@ -81,6 +81,8 @@ public class Day9 : IDay
         }
     }
 
+    public static int DayNumber => 9;
+
     public ulong Part1(string input)
     {
         int bigTotal = 0;

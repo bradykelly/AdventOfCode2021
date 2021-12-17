@@ -47,6 +47,8 @@ public class Day3 : IDay
         return count1 == count0 ? null : count1 > count0 ? '0' : '1';
     }
 
+    public static int DayNumber => 3;
+
     public ulong Part1(string input)
     {
         var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries).ToList();

@@ -86,17 +86,13 @@ public class Day11 : IDay
         internal void Flash()
         {
             HasFlashed = true;
-            var neighbours = NeighbouringOctopuses(_octoGrid, Y, X);
-            foreach (var neighbour in neighbours)
-            {
-                neighbour.Increment();
-            }
-
-            //HasFlashed = true;
             Energy = 0;
             _flashCount += 1;
         }
     }
+
+    public static int DayNumber => 11;
+
     public ulong Part1(string input)
     {
         BuildOctoGrid(input);
@@ -109,6 +105,14 @@ public class Day11 : IDay
                 {
                     var octo = _octoGrid[y, x];
                     octo.Increment();
+                    if (octo.HasFlashed)
+                    {
+                        var neighbours = Octopus.NeighbouringOctopuses(_octoGrid, octo.Y, octo.X);
+                        foreach (var neighbour in neighbours.Where(n => !n.HasFlashed))
+                        {
+                            neighbour.Increment();
+                        }
+                    }
                 }
             }
         }

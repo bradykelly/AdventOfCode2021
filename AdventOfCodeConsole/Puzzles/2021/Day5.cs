@@ -156,6 +156,8 @@ public class Day5 : IDay
 
     }
 
+    public static int DayNumber => 5;
+
     public ulong Part1(string input)
     {
         var lines = ParsePointsAndLines(input);

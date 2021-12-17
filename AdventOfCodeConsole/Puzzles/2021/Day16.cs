@@ -76,6 +76,8 @@
             }
         }
 
+        public static int DayNumber => 16;
+
         public ulong Part1(string input)
         {
             var binaryString = string.Join(string.Empty, input
