@@ -80,18 +80,19 @@ public class Day11 : IDay
         internal void Increment()
         {
             Energy++;
-            //if (Energy > 9 && !HasFlashed) Flash();
+            if (Energy > 9 && !HasFlashed) Flash();
         }
 
         internal void Flash()
         {
+            HasFlashed = true;
             var neighbours = NeighbouringOctopuses(_octoGrid, Y, X);
             foreach (var neighbour in neighbours)
             {
                 neighbour.Increment();
             }
 
-            HasFlashed = true;
+            //HasFlashed = true;
             Energy = 0;
             _flashCount += 1;
         }
@@ -107,11 +108,7 @@ public class Day11 : IDay
                 for (int x = 0; x < _octoGrid.GetLength(1); x++)
                 {
                     var octo = _octoGrid[y, x];
-                    octo.Energy++;
-                    if (octo.Energy > 9 && !octo.HasFlashed)
-                    {
-                        octo.Flash();
-                    }
+                    octo.Increment();
                 }
             }
         }

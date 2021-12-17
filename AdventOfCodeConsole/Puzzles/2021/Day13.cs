@@ -100,7 +100,7 @@ public class Day13 : IDay
             Console.WriteLine();
         }
 
-        Console.ReadLine();
+        //Console.ReadLine();
 
         return points.Count();
     }

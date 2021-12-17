@@ -1,11 +1,8 @@
-﻿using AdventOfCodeConsole.Puzzles._2021;
-using AdventOfCodeConsole.Runners;
-using AdventOfCodeConsole.Runners._2021;
-using AdventOfCodeConsole.Tools;
+﻿using AdventOfCodeConsole.Runners._2020;
 using BenchmarkDotNet.Running;
 
 #if !DEBUG
-    BenchmarkRunner.Run<Day13Runner>();
+    BenchmarkRunner.Run<Day4Runner>();
 #else
-    await new Day13Runner().Run();
+    await new Day4Runner().Run();
 #endif

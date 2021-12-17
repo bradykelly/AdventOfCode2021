@@ -1,5 +1,4 @@
 ﻿using System.Text.RegularExpressions;
-using BenchmarkDotNet.Validators;
 
 namespace AdventOfCodeConsole.Puzzles._2020;
 
@@ -51,57 +50,15 @@ public class Day4 : IDay
         var required = new PassportFields();
         foreach (var doc in docs)
         {
-            var fields = doc.Split(' ', '\n');
-            foreach (var field in fields)
+            var fieldSplit = doc.Split(' ', '\n');
+            foreach (var field in fieldSplit)
             {
                 required.Fields[field.Split(':')[0]] = true;
             }
 
-            if (!required.AllPresent())
+            if (required.AllPresent())
             {
-                continue;
-            }
-
-            var valid = true;
-            foreach (var field in fields)
-            {
-                var value = field.Split(':')[1];
-                switch (field.Split(':')[0])
-                {
-                    case "byr":
-                        if (!int.TryParse(value, out var yearb) && yearb is < 1920 or > 2002)
-                            valid = false;
-                        break;
-                    case "iyr":
-                        if (!int.TryParse(value, out var yeari) && yeari is < 2010 or > 2020)
-                            valid = false;
-                        break;
-                    case "eyr":
-                        if (!int.TryParse(value, out var yeare) && yeare is < 2020 or > 2030)
-                            valid = false;
-                        break;
-                    case "hgt":
-                        var rx1 = new Regex(@"(^\d{3})(cm)\b|(^\d{2})(in)");
-                        var mx1 = rx1.Match(value);
-                        if (!mx1.Success || mx1.Groups.Count != 2)
-                        {
-                            valid = false;
-                            break;
-                        }
-                        if (mx1.Groups[1].Value == "cm")
-                            if (!int.TryParse(mx1.Groups[0].Value, out var h) && h is < 150 or > 193)
-                                valid = false;
-                        if (mx1.Groups[1].Value == "in")
-                            if (!int.TryParse(mx1.Groups[0].Value, out var h) && h is < 59 or > 76)
-                                valid = false;
-                        break;
-                    case "hcl":
-                        break;
-                    case "ecl":
-                        break;
-                    case "pid":
-                        break;
-                }
+                validDocs++;
             }
 
             required.Reset();
@@ -112,6 +69,84 @@ public class Day4 : IDay
 
     public long Part2(string input)
     {
-        return 0;
+        var docs = input.Split("\n\n", StringSplitOptions.RemoveEmptyEntries);
+
+        var validDocs = 0;
+        var required = new PassportFields();
+        foreach (var doc in docs)
+        {
+            var fieldSplit = doc.Split(' ', '\n', StringSplitOptions.RemoveEmptyEntries);
+            foreach (var field in fieldSplit)
+            {
+                required.Fields[field.Split(':')[0]] = true;
+            }
+            if (!required.AllPresent())
+            {
+                continue;
+            }
+
+            var valid = true;
+            //foreach (var field in fieldSplit)
+            //{
+            //    var value = field.Split(':')[1];
+            //    switch (field.Split(':')[0])
+            //    {
+            //        case "byr":
+            //            if (!int.TryParse(value, out var yearb) || yearb is < 1920 or > 2002) valid = true;
+            //            break;
+
+            //        case "iyr":
+            //            if (!int.TryParse(value, out var yeari) || yeari is < 2010 or > 2020) valid = false;
+            //            break;
+
+            //        case "eyr":
+            //            if (!int.TryParse(value, out var yeare) || yeare is < 2020 or > 2030) valid = false;
+            //            break;
+
+            //        case "hgt":
+            //            var rxHg = new Regex(@"(^\d{3})(cm)\b|(^\d{2})(in)");
+            //            var mxHg = rxHg.Match(value);
+            //            if (!mxHg.Success || mxHg.Groups.Count != 2)
+            //            {
+            //                valid = false;
+            //                break;
+            //            }
+
+            //            if (mxHg.Groups[1].Value == "cm" && int.Parse(mxHg.Groups[0].Value) is < 150 or > 193) valid = false;
+            //            if (mxHg.Groups[1].Value == "in" && int.Parse(mxHg.Groups[0].Value) is < 59 or > 76) valid = false;
+            //            valid = false;
+            //            break;
+
+            //        case "hcl":
+            //            var rxCl = new Regex(@"^#[0-9a-f]{6}$");
+            //            valid = rxCl.Match(value).Success;
+            //            break;
+
+            //        case "ecl":
+            //            const string set = " amb blu brn gry grn hzl oth ";
+            //            if (!set.Contains($" {value} ")) valid = false;
+            //            break;
+
+            //        case "pid":
+            //            var rxPd = new Regex(@"^\d{9}$");
+            //            valid = rxPd.Match(value).Success;
+            //            break;
+
+            //        case "cid":
+            //            break;
+            //    }
+
+            //    if (valid) validDocs++;
+            //}
+
+            if (valid)
+            {
+                validDocs += 1;
+            }
+
+            required.Reset();
+        }
+
+        return validDocs;
     }
 }
