@@ -76,7 +76,7 @@
             }
         }
 
-        public long Part1(string input)
+        public ulong Part1(string input)
         {
             var binaryString = string.Join(string.Empty, input
                 .Where(c => c != '\n')
@@ -86,7 +86,7 @@
             var versionSum = 0;
             ProcessPackets(bitString, ref versionSum, false);
 
-            return versionSum;
+            return (ulong)versionSum;
         }
     }
 }

@@ -44,13 +44,13 @@ public class Day6 : IDay
         return counts.Sum();
     }
 
-    public long Part1(string input)
+    public ulong Part1(string input)
     {
-        return CalculateFish(input, 80);
+        return (ulong)CalculateFish(input, 80);
     }
 
-    public long Part2(string input)
+    public ulong Part2(string input)
     {
-        return CalculateFish(input, 256);
+        return (ulong)CalculateFish(input, 256);
     }
 }

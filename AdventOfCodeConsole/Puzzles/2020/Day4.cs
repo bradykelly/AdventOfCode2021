@@ -43,7 +43,7 @@ public class Day4 : IDay
         }
     }
 
-    public long Part1(string input)
+    public ulong Part1(string input)
     {
         var docs = input.Split("\n\n", StringSplitOptions.RemoveEmptyEntries);
         var validDocs = 0;
@@ -63,10 +63,10 @@ public class Day4 : IDay
             }
             required.Reset();
         }
-        return validDocs;
+        return (ulong)validDocs;
     }
 
-    public long Part2(string input)
+    public ulong Part2(string input)
     {
         var docs = input.Split("\n\n", StringSplitOptions.RemoveEmptyEntries);
         var validDocs = 0;
@@ -144,6 +144,6 @@ public class Day4 : IDay
             required.Reset();
         }
 
-        return validDocs;
+        return (ulong)validDocs;
     }
 }

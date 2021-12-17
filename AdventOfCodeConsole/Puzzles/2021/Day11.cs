@@ -97,7 +97,7 @@ public class Day11 : IDay
             _flashCount += 1;
         }
     }
-    public long Part1(string input)
+    public ulong Part1(string input)
     {
         BuildOctoGrid(input);
 
@@ -113,10 +113,10 @@ public class Day11 : IDay
             }
         }
 
-        return _flashCount;
+        return (ulong)_flashCount;
     }
 
-    public long Part2(string input)
+    public ulong Part2(string input)
     {
         return 0;
     }

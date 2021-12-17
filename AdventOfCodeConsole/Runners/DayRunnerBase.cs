@@ -11,8 +11,8 @@ public class DayRunnerBase<T> where T: IDay, new()
     private readonly int _dayNumber;
     private readonly int _year;
     private string? _input;
-    private long _output1;
-    private long _output2;
+    private ulong _output1;
+    private ulong _output2;
     private T _day;
 
     public DayRunnerBase(int day, int year=2021)

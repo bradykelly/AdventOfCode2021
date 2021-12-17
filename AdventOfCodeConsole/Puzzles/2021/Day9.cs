@@ -81,7 +81,7 @@ public class Day9 : IDay
         }
     }
 
-    public long Part1(string input)
+    public ulong Part1(string input)
     {
         int bigTotal = 0;
         var heatMap = GetHeatMap(input);
@@ -92,10 +92,10 @@ public class Day9 : IDay
         {
             bigTotal += heatMap[point.Y, point.X] + 1;
         }
-        return bigTotal;
+        return (ulong)bigTotal;
     }
 
-    public long Part2(string input)
+    public ulong Part2(string input)
     {
         var bigTotal = 0;
 
@@ -110,6 +110,6 @@ public class Day9 : IDay
 
         var largest = basins.OrderByDescending(b => b.Count).Take(3).ToList();
 
-        return largest[0].Count * largest[1].Count * largest[2].Count;
+        return (ulong)(largest[0].Count * largest[1].Count * largest[2].Count);
     }
 }

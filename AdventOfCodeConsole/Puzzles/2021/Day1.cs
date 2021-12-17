@@ -4,7 +4,7 @@ namespace AdventOfCodeConsole.Puzzles._2021;
 
 public class Day1 : IDay
 {
-    public long Part1(string input)
+    public ulong Part1(string input)
     {
         var depths = InputReader.GetIntsFromCsvString(input);
         var increases = 0;
@@ -14,10 +14,10 @@ public class Day1 : IDay
                 increases++;
         }
 
-        return increases;
+        return (ulong)increases;
     }
 
-    public long Part2(string input)
+    public ulong Part2(string input)
     {
         var depths = InputReader.GetIntsFromCsvString(input);
 
@@ -31,6 +31,6 @@ public class Day1 : IDay
             }
         }
 
-        return count;
+        return (ulong)count;
     }
 }

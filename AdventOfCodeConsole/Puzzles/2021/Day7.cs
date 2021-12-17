@@ -9,7 +9,7 @@ public class Day7 : IDay
         return stepCount * (stepCount + 1) / 2;
     }
 
-    public long Part1(string input)
+    public ulong Part1(string input)
     {
         var horizontals = InputReader.GetIntsFromLine(input);
         var minPos = horizontals.ToArray().Min();
@@ -27,10 +27,10 @@ public class Day7 : IDay
             minFuel = Math.Min(totalFuel, minFuel);
         }
 
-        return minFuel;
+        return (ulong)minFuel;
     }
 
-    public long Part2(string input)
+    public ulong Part2(string input)
     {
         var horizontals = InputReader.GetIntsFromLine(input);
         var minPos = horizontals.ToArray().Min();
@@ -48,6 +48,6 @@ public class Day7 : IDay
             minFuel = Math.Min(totalFuel, minFuel);
         }
 
-        return minFuel;
+        return (ulong)minFuel;
     }
 }

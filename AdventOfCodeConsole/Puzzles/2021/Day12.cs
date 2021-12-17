@@ -9,7 +9,7 @@ namespace AdventOfCodeConsole.Puzzles._2021
 {
     public class Day12: IDay
     {
-        public long Part1(string input)
+        public ulong Part1(string input)
         {
             var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
 
@@ -25,7 +25,7 @@ namespace AdventOfCodeConsole.Puzzles._2021
             return 0;
         }
 
-        public long Part2(string input)
+        public ulong Part2(string input)
         {
             return 0;
         }

@@ -58,7 +58,7 @@ public class Day13 : IDay
         points = points.Distinct().ToList();
     }
 
-    public long Part1(string input)
+    public ulong Part1(string input)
     {
         var points = GetPointsList(input);
 
@@ -66,10 +66,10 @@ public class Day13 : IDay
 
         FoldLeft(ref points, foldLineX);
 
-        return points.Count();
+        return (ulong)points.Count();
     }
 
-    public long Part2(string input)
+    public ulong Part2(string input)
     {
         var points = GetPointsList(input);
         var folds = GetFoldInstructions(input);
@@ -102,6 +102,6 @@ public class Day13 : IDay
 
         //Console.ReadLine();
 
-        return points.Count();
+        return (ulong)points.Count();
     }
 }

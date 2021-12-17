@@ -5,7 +5,7 @@ namespace AdventOfCodeConsole.Puzzles._2021;
 
 public class Day14 : IDay
 {
-    public long Part1(string input)
+    public ulong Part1(string input)
     {
         var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
         var rules = lines[1..];
@@ -53,10 +53,10 @@ public class Day14 : IDay
         var maxChar = counts.Where(x => x.Value == counts.Values.Max()).Select(x => x.Key).Single();
         var minChar = counts.Where(x => x.Value == counts.Values.Min()).Select(x => x.Key).Single();
 
-        return counts[maxChar] - counts[minChar];
+        return (ulong)(counts[maxChar] - counts[minChar]);
     }
 
-    public long Part2(string input)
+    public ulong Part2(string input)
     {
         var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
         var rules = lines[1..];
@@ -112,7 +112,7 @@ public class Day14 : IDay
         var maxChar = counts.Where(x => x.Value == counts.Values.Max()).Select(x => x.Key).Single();
         var minChar = counts.Where(x => x.Value == counts.Values.Min()).Select(x => x.Key).Single();
 
-        return counts[maxChar] - counts[minChar];
+        return (ulong)(counts[maxChar] - counts[minChar]);
     }
 }
 

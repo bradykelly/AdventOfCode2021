@@ -29,7 +29,7 @@ public class Day5 : IDay
         return GetIndicator(directions, dirIndex + 1, nextHalf, forRow);
     }
 
-    public long Part1(string input)
+    public ulong Part1(string input)
     {
         var passes = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
 
@@ -42,10 +42,10 @@ public class Day5 : IDay
             highestId = Math.Max(highestId, seatId);
         }
 
-        return highestId;
+        return (ulong)highestId;
     }
 
-    public long Part2(string input)
+    public ulong Part2(string input)
     {
         return 0;
     }

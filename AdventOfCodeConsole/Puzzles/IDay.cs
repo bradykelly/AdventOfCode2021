@@ -2,12 +2,12 @@
 
 public interface IDay
 {
-    public long Part1(string input)
+    public ulong Part1(string input)
     {
         return 0;
     }
 
-    long Part2(string input)
+    public ulong Part2(string input)
     {
         return 0;
     }

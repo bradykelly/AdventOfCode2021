@@ -8,7 +8,7 @@
             public int Right { get; init; }
         }
 
-        public long Part1(string input)
+        public ulong Part1(string input)
         {
             var rows = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
             var trees = 0;
@@ -29,10 +29,10 @@
                 }
             }
 
-            return trees;
+            return (ulong)trees;
         }
 
-        public long Part2(string input)
+        public ulong Part2(string input)
         {
             var rows = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
 
@@ -72,7 +72,7 @@
                 treesProduct *= trees;
             }
 
-            return treesProduct;
+            return (ulong)treesProduct;
         }
     }
 }

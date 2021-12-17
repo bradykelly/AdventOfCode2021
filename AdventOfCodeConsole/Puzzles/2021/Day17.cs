@@ -8,6 +8,10 @@
 // If  your starting y-velocity is +100000 at y=0, then you will go up and come back down and cross y=0 again
 // with velocity -100001 at the end of the step.  your next y position will be -100001
 
+//- for all y > 0, up until max y, find x<area x start that get you in
+//- for all area y start / 2 <= y <= 0, find x> area x start that get you in
+//- add the number of positions in the target area(width* height) that you can directly shoot the probe at
+
 public class Day17 : IDay
 {
 }

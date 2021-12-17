@@ -75,7 +75,7 @@ public class Day4 : IDay
         }
     }
 
-    public long Part1(string input)
+    public ulong Part1(string input)
     {
         var inputLines = input.Split('\n');
 
@@ -94,7 +94,7 @@ public class Day4 : IDay
             {
                 if (board.Mark(call))
                 {
-                    return board.SumUnmarked() * call;
+                    return (ulong)(board.SumUnmarked() * call);
                 }
             }
         }
@@ -102,7 +102,7 @@ public class Day4 : IDay
         return 0;
     }
 
-    public long Part2(string input)
+    public ulong Part2(string input)
     {
         var inputLines = input.Split('\n');
 
@@ -132,6 +132,6 @@ public class Day4 : IDay
         }
 
         var (board1, i) = winningBoards.Last();
-        return board1.SumUnmarked() * i;
+        return (ulong)(board1.SumUnmarked() * i);
     }
 }

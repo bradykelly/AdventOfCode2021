@@ -31,7 +31,7 @@ namespace AdventOfCodeConsole.Puzzles._2021
             _allDigits.Add("abcdfg", 9);
         }
 
-        public long Part1(string input)
+        public ulong Part1(string input)
         {
             var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
             var uniqueLengths = _uniqueDigits.Select(kv => kv.Key.Length);
@@ -44,10 +44,10 @@ namespace AdventOfCodeConsole.Puzzles._2021
                 totalUniques += uniquesInOutput;
             }
 
-            return totalUniques;
+            return (ulong)totalUniques;
         }
 
-        public long Part2(string input)
+        public ulong Part2(string input)
         {
             var bigTotal = 0;
             var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
@@ -80,7 +80,7 @@ namespace AdventOfCodeConsole.Puzzles._2021
                 }
             }
 
-            return bigTotal;
+            return (ulong)bigTotal;
         }
     }
 }

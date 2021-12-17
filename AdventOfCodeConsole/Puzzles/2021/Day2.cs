@@ -2,7 +2,7 @@
 
 public class Day2: IDay
 {
-    public long Part1(string? input)
+    public ulong Part1(string? input)
     {
         var (horizontal, vertical) = (0, 0);
 
@@ -29,10 +29,10 @@ public class Day2: IDay
             }
         }
 
-        return vertical * horizontal;
+        return (ulong)(vertical * horizontal);
     }
 
-    public long Part2(string? input)
+    public ulong Part2(string? input)
     {
         var (horizontal, vertical) = (0, 0);
         var aim = 0;
@@ -61,6 +61,6 @@ public class Day2: IDay
             }
         }
 
-        return vertical * horizontal;
+        return (ulong)(vertical * horizontal);
     }
 }

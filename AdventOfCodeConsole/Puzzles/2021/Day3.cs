@@ -47,7 +47,7 @@ public class Day3 : IDay
         return count1 == count0 ? null : count1 > count0 ? '0' : '1';
     }
 
-    public long Part1(string input)
+    public ulong Part1(string input)
     {
         var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries).ToList();
         var lineLength = lines[0].Length;
@@ -67,10 +67,10 @@ public class Day3 : IDay
         var gamma = Convert.ToInt32(gammaBinary.ToString(), 2);
         var epsilon = Convert.ToInt32(epsilonBinary.ToString(), 2);
 
-        return gamma * epsilon;
+        return (ulong)(gamma * epsilon);
     }
 
-    public long Part2(string input)
+    public ulong Part2(string input)
     {
         var binaries = input.Split('\n', StringSplitOptions.RemoveEmptyEntries).ToList();
         var binaryLength = binaries[0].Length;
@@ -98,6 +98,6 @@ public class Day3 : IDay
         }
 
         var support = Convert.ToInt32(oxygenNumbers[0], 2) * Convert.ToInt32(co2Numbers[0], 2);
-        return support;
+        return (ulong)support;
     }
 }

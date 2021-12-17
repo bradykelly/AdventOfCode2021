@@ -156,7 +156,7 @@ public class Day5 : IDay
 
     }
 
-    public long Part1(string input)
+    public ulong Part1(string input)
     {
         var lines = ParsePointsAndLines(input);
 
@@ -171,10 +171,10 @@ public class Day5 : IDay
             }
         }
 
-        return pointCounts.Values.Count(v => v >= 2);
+        return (ulong)pointCounts.Values.Count(v => v >= 2);
     }
 
-    public long Part2(string input)
+    public ulong Part2(string input)
     {
         var lines = ParsePointsAndLines(input);
 
@@ -189,6 +189,6 @@ public class Day5 : IDay
             }
         }
 
-        return pointCounts.Values.Count(v => v >= 2);
+        return (ulong)pointCounts.Values.Count(v => v >= 2);
     }
 }
