@@ -2,16 +2,8 @@
 
 public class Day10 : IDay
 {
-    private readonly Dictionary<char, int> _scores = new()
-    {
-        { ')', 3 },
-        { ']', 57 },
-        { '}', 1197 },
-        { '>', 25137 }
-    };
-
     private List<string> _corrupted = new();
-    public long Part1(string input)
+    public ulong Part1(string input)
     {
         Dictionary<char, char> _matches = new()
         {
@@ -19,6 +11,14 @@ public class Day10 : IDay
             { '[', ']' },
             { '{', '}' },
             { '<', '>' }
+        };
+
+        Dictionary<char, int> _scores = new()
+        {
+            { ')', 3 },
+            { ']', 57 },
+            { '}', 1197 },
+            { '>', 25137 }
         };
 
         var totalScore = 0;
@@ -43,10 +43,10 @@ public class Day10 : IDay
             }
         }
 
-        return totalScore;
+        return (ulong)totalScore;
     }
 
-    public long Part2(string input)
+    public ulong Part2(string input)
     {
         Dictionary<char, char> _matches = new()
         {
@@ -56,7 +56,15 @@ public class Day10 : IDay
             { '>', '<' }
         };
 
-        var totalScore = 0;
+        Dictionary<char, int> scores = new()
+        {
+            { ')', 1 },
+            { ']', 2 },
+            { '}', 3 },
+            { '>', 4 }
+        };
+
+        var scoreList = new List<ulong>();
         var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
         var stack = new Stack<char>();
         foreach (var line in lines.Where(l => !_corrupted.Contains(l)))
@@ -89,8 +97,18 @@ public class Day10 : IDay
                     _ => null
                 };
             }
+
+            ulong totalScore = 0;
+            foreach (var ch in completion)
+            {
+                totalScore *= 5;
+                totalScore += (ulong)scores[ch];
+            }
+            scoreList.Add(totalScore);
         }
 
-        return totalScore;
+        var middle = scoreList.Count / 2;
+
+        return scoreList.OrderBy(s => s).ToList()[middle];
     }
 }
