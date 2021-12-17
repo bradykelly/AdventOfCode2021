@@ -3,6 +3,7 @@
 //    flash! iterates through its neighbors, calling maybe-flash on each.
 
 using System.Diagnostics;
+using Microsoft.Diagnostics.Tracing.Parsers.MicrosoftAntimalwareEngine;
 
 namespace AdventOfCodeConsole.Puzzles._2021;
 
@@ -99,10 +100,9 @@ public class Day11 : IDay
         {
             for (int x = 0; x < _octoGrid.GetLength(1); x++)
             {
-                var octo = _octoGrid[y, x];
-                octo.Energy++;
-                if (octo.Energy is 10)
-                    count += octo.Flash(_octoGrid);
+                _octoGrid[y, x].Energy++;
+                if (_octoGrid[y, x].Energy is 10)
+                    count += _octoGrid[y, x].Flash(_octoGrid);
             }
         }
 
@@ -110,9 +110,8 @@ public class Day11 : IDay
         {
             for (int x = 0; x < _octoGrid.GetLength(1); x++)
             {
-                var octo = _octoGrid[y, x];
-                if (octo.Energy > 9)
-                    octo.Energy = 0;
+                if (_octoGrid[y, x].Energy > 9)
+                    _octoGrid[y, x].Energy = 0;
             }
         }
 
@@ -123,30 +122,23 @@ public class Day11 : IDay
     {
         BuildGrid(input);
 
-        ulong flashCount = 0;
+        var flashCount = 0;
         for (int i = 0; i < 100; i++)
         {
-            flashCount += (ulong)Step();
+            flashCount += Step();
         }
 
-        return flashCount;
+        return (ulong)flashCount;
     }
 
     public ulong Part2(string input)
     {
         BuildGrid(input);
 
-        for (int i = 1; ; i++)
-        {
-            if (Step() is 100)
-            {
-                return (ulong)i;
-            }
-        }
+        var i = 1;
+        while (Step() is not 100)
+            i++;
+
+        return (ulong)i;
     }
-
-
-
-
-
 }
