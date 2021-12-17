@@ -2,7 +2,7 @@
 using BenchmarkDotNet.Running;
 
 #if !DEBUG
-    BenchmarkRunner.Run<Day1Runner>();
+    BenchmarkRunner.Run<Day2Runner>();
 #else
-    await new Day1Runner().Run();
+    await new Day2Runner().Run();
 #endif

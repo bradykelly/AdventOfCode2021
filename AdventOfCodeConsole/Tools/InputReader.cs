@@ -33,6 +33,22 @@ internal static class InputReader
         return input;
     }
 
+    public static int[] GetIntsFromCsvString(string input)
+    {
+        var ints = new List<int>();
+        var lines = input
+            .Split('\n');
+        foreach (var line in lines)
+        {
+            if (line != string.Empty)
+            {
+                ints.Add(int.Parse(line));
+            }
+        }
+
+        return ints.ToArray();
+    }
+
     internal static async Task<ImmutableArray<string>> GetLinesForDay(int day)
     {
         var input = await GetInputForDay(day);
