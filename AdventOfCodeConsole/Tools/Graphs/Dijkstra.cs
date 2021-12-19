@@ -1,31 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AdventOfCodeConsole.Tools;
+﻿namespace AdventOfCodeConsole.Tools.Graphs;
 
 // How to use
 //Dijkstra d = new Dijkstra(_edges, _nodes);
 //d.calculateDistance(_dictNodes["A"]);
-//List<Node> path = d.getPathTo(_dictNodes["C"]);
+//List<Vertex> path = d.getPathTo(_dictNodes["C"]);
 
 class Dijkstra
 {
-    private List<Node> _nodes;
+    private List<Vertex> _nodes;
     private List<Edge> _edges;
-    private List<Node?> _basis;
+    private List<Vertex?> _basis;
     private Dictionary<string, double> _dist;
-    private Dictionary<string, Node?> _previous;
+    private Dictionary<string, Vertex?> _previous;
 
-    public Dijkstra(List<Edge> edges, List<Node> nodes)
+    public Dijkstra(List<Edge> edges, List<Vertex> nodes)
     {
         _edges = edges;
         _nodes = nodes;
-        _basis = new List<Node?>();
+        _basis = new List<Vertex?>();
         _dist = new Dictionary<string, double>();
-        _previous = new Dictionary<string, Node?>();
+        _previous = new Dictionary<string, Vertex?>();
 
         // record node 
         foreach (var n in _nodes)
@@ -37,20 +31,20 @@ class Dijkstra
     }
 
     /// Calculates the shortest path from the start to all other nodes
-    public void CalculateDistance(Node start)
+    public void CalculateDistance(Vertex start)
     {
         _dist[start.Name] = 0;
 
         while (_basis.Count > 0)
         {
-            Node? u = GetNodeWithSmallestDistance();
+            Vertex? u = GetNodeWithSmallestDistance();
             if (u == null)
             {
                 _basis.Clear();
             }
             else
             {
-                foreach (Node v in GetNeighbours(u))
+                foreach (Vertex v in GetNeighbours(u))
                 {
                     double alt = _dist[u.Value.Name] + GetDistanceBetween(u, v);
                     if (alt < _dist[v.Name])
@@ -65,9 +59,9 @@ class Dijkstra
         }
     }
 
-    public List<Node?> GetPathTo(Node? d)
+    public List<Vertex?> GetPathTo(Vertex? d)
     {
-        var path = new List<Node?>();
+        var path = new List<Vertex?>();
 
         path.Insert(0, d);
 
@@ -80,12 +74,12 @@ class Dijkstra
         return path;
     }
 
-    private Node? GetNodeWithSmallestDistance()
+    private Vertex? GetNodeWithSmallestDistance()
     {
         double distance = double.MaxValue;
-        Node? smallest = null;
+        Vertex? smallest = null;
 
-        foreach (Node n in _basis)
+        foreach (Vertex n in _basis)
         {
             if (_dist[n.Name] < distance)
             {
@@ -97,9 +91,9 @@ class Dijkstra
         return smallest;
     }
 
-    public List<Node> GetNeighbours(Node? n)
+    public List<Vertex> GetNeighbours(Vertex? n)
     {
-        List<Node> neighbors = new List<Node>();
+        List<Vertex> neighbors = new List<Vertex>();
 
         foreach (Edge e in _edges)
         {
@@ -112,7 +106,7 @@ class Dijkstra
         return neighbors;
     }
 
-    private double GetDistanceBetween(Node? o, Node? d)
+    private double GetDistanceBetween(Vertex? o, Vertex? d)
     {
         foreach (Edge e in _edges)
         {
