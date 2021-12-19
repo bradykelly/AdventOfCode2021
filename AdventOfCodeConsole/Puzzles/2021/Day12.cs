@@ -8,68 +8,63 @@ namespace AdventOfCodeConsole.Puzzles._2021
 
         private Dictionary<string, List<string>> _graph = new();
 
-        private void AddAdjacency(string start, HashSet<string> ends)
+        private void AddAdjacency(string start, string end)
         {
             if (!_graph.ContainsKey(start))
-                _graph.Add(start, ends.ToList());
+                _graph.Add(start, new List<string>{end});
             else
-                _graph[start].AddRange(ends);
-        }
+                _graph[start].Add(end);
 
-        private IEnumerable<List<string>> Traverse(
-                Dictionary<string, List<string>> graph,
-                string current,
-                string end,
-                IEnumerable<string> path = null)
-        {
-            path ??= new List<string>();
-
-            if (char.IsLower(current[0]))
-            {
-                if (path.Contains(current))
-                    yield break;
-            }
-
-            path = path.Append(current);
-
-            if (current == end)
-            {
-                yield return path.ToList();
-                yield break;
-            }
-
-            foreach (var neighbour in graph[current])
-            {
-                foreach (var subPath in Traverse(graph, neighbour, end, path))
-                {
-                    yield return subPath;
-                }
-            }
+            if (start == "start")
+                return;
+            if (!_graph.ContainsKey(end))
+                _graph.Add(end, new List<string> { start });
+            else
+                _graph[end].Add(start);
         }
 
         public ulong Part1(string input)
         {
+            IEnumerable<List<string>> Traverse(
+                Dictionary<string, List<string>> graph,
+                string current,
+                string end,
+                IEnumerable<string> path = null)
+            {
+                path ??= new List<string>();
+
+                if (char.IsLower(current[0]))
+                {
+                    if (path.Contains(current))
+                        yield break;
+                }
+
+                path = path.Append(current);
+
+                if (current == end)
+                {
+                    yield return path.ToList();
+                    yield break;
+                }
+
+                foreach (var neighbour in graph[current])
+                {
+                    foreach (var subPath in Traverse(graph, neighbour, end, path))
+                    {
+                        yield return subPath;
+                    }
+                }
+            }
+
             var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
 
             foreach (var line in lines)
             {
                 var edgeSplit = line.Split('-');
-                //AddAdjacencies(new Edge(new Vertex(edgeSplit[0]), new Vertex(edgeSplit[1])));
+                AddAdjacency(edgeSplit[0], edgeSplit[1]);
             }
-
-            _graph.Add("start", new List<string> { "A", "b" });
-            _graph.Add("A", new List<string> { "c", "b", "end" });
-            _graph.Add("b", new List<string> { "A", "d", "end" });
-            _graph.Add("c", new List<string> { "A" });
-            _graph.Add("d", new List<string> { "b" });
-            _graph.Add("end", new List<string> { "A", "b" });
 
             var result = Traverse(_graph, "start", "end");
-
-            foreach (var path in result)
-            {
-                Console.WriteLine(string.Join(',', path));
-            }
 
             return (ulong)result.Count();
         }
