@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using Microsoft.Diagnostics.Tracing.Etlx;
 
 namespace AdventOfCodeConsole.Puzzles._2021;
 

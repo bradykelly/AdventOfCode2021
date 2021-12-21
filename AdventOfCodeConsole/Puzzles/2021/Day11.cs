@@ -3,7 +3,6 @@
 //    flash! iterates through its neighbors, calling maybe-flash on each.
 
 using System.Diagnostics;
-using Microsoft.Diagnostics.Tracing.Parsers.MicrosoftAntimalwareEngine;
 
 namespace AdventOfCodeConsole.Puzzles._2021;
 

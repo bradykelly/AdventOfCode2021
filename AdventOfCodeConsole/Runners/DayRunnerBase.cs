@@ -4,8 +4,8 @@ using BenchmarkDotNet.Attributes;
 
 namespace AdventOfCodeConsole.Runners;
 
-[MemoryDiagnoser(false)]
-[SimpleJob(launchCount: 1, warmupCount: 5, targetCount: 5)]
+[MemoryDiagnoser]
+[SimpleJob(launchCount: 1, warmupCount: 5, targetCount: 10)]
 public class DayRunnerBase<T> where T: IDay, new() 
 {
     private readonly int _dayNumber;

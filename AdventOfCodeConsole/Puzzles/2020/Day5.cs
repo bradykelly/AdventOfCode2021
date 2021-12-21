@@ -1,6 +1,4 @@
-﻿using Microsoft.Diagnostics.Tracing.Parsers.AspNet;
-
-namespace AdventOfCodeConsole.Puzzles._2020;
+﻿namespace AdventOfCodeConsole.Puzzles._2020;
 
 public class Day5 : IDay
 {
