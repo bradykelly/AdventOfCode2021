@@ -37,6 +37,8 @@ public class DayRunnerBase<T> where T: IDay, new()
     [GlobalSetup]
     public async Task Setup()
     {
+        while (!System.Diagnostics.Debugger.IsAttached)
+            Thread.Sleep(TimeSpan.FromMilliseconds(100));
         _input = await InputReader.GetInputForDay(_dayNumber, _year);
     }
 

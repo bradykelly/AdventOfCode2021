@@ -14,7 +14,7 @@ public class Day20: IDay
     private static (string algorithm, List<Point> imagePixels) ParseInput(string input)
     {
         var inputSplit = input.Split("\n\n");
-        var algorithm = inputSplit[0];
+        var algorithm = inputSplit[0].Replace("\n", "");
         var imageRows = inputSplit[1].Split("\n");
 
         var imagePixels = new List<Point>();
@@ -57,10 +57,26 @@ public class Day20: IDay
         var theGreatVoid = algo[0];
 
         var (borderMinY, borderMaxY, borderMinX, borderMaX) = (
-            image.Select(p => p.Y).Min(), 
-            image.Select(p => p.Y).Max(), 
-            image.Select(p => p.X).Min(),
-            image.Select(p => p.X).Max());
+            image.Select(p => p.Y).Min() - 1, 
+            image.Select(p => p.Y).Max() + 1, 
+            image.Select(p => p.X).Min() - 1,
+            image.Select(p => p.X).Max() + 1);
+
+        for (var row = borderMinY; row <= borderMaxY; row++)
+        {
+            for (var col = borderMinX; col <= borderMaxY; col++)
+            {
+                var neighbs = GetNeighbours(new Point(row, col));
+                var binString = "";
+                foreach (var n in neighbs)
+                {
+                    binString += image.Contains(n) ? "1" :"0";
+                }
+
+                var address = Convert.ToInt32(binString, 2);
+            }
+        }
+
 
 
 
