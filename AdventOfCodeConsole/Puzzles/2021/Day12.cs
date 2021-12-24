@@ -27,17 +27,17 @@
                 Dictionary<string, List<string>> graph,
                 string current,
                 string end,
-                IEnumerable<string> path = null)
+                IEnumerable<string>? path = null)
             {
                 path ??= new List<string>();
 
                 if (char.IsLower(current[0]))
                 {
-                    if (path.Contains(current))
+                    if (path!.Contains(current))
                         yield break;
                 }
 
-                path = path.Append(current);
+                path = path!.Append(current);
 
                 if (current == end)
                 {
@@ -73,7 +73,7 @@
                 Dictionary<string, List<string>> graph,
                 string current,
                 string end,
-                IEnumerable<string> path = null)
+                IEnumerable<string>? path = null)
             {
                 path ??= new List<string>();
 

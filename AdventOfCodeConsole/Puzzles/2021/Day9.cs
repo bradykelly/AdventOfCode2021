@@ -7,10 +7,10 @@ namespace AdventOfCodeConsole.Puzzles._2021;
 
 public class Day9 : IDay
 {
-    private static int[,] GetHeatMap(string input)
+    private static long[,] GetHeatMap(string input)
     {
         var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
-        var heatMap = new int[lines.Length, lines[0].Length];
+        var heatMap = new long[lines.Length, lines[0].Length];
 
         for (var y = 0; y < lines.Length; y++)
         {
@@ -24,10 +24,10 @@ public class Day9 : IDay
         return heatMap;
     }
 
-    private static List<Point> GetLowPoints(int[,] heatMap)
+    private static List<Point> GetLowPoints(long[,] heatMap)
     {
-        var rowCount = heatMap.GetLength(0);
-        var colCount = heatMap.GetLength(1);
+        var rowCount = heatMap.GetLongLength(0);
+        var colCount = heatMap.GetLongLength(1);
 
         var lowPoints = new List<Point>();
         for (var y = 0; y < rowCount; y++)
@@ -68,7 +68,7 @@ public class Day9 : IDay
 
     private List<List<Point>> basins = new List<List<Point>>();
 
-    private void GetBasinPoints(int[,] array, Point point, List<Point> basin)
+    private void GetBasinPoints(long[,] array, Point point, List<Point> basin)
     {
         var neighbours = GridMethods.AdjacentPoints(array, point.Y, point.X).ToList();
         foreach (var adj in neighbours)
@@ -85,7 +85,7 @@ public class Day9 : IDay
 
     public ulong Part1(string input)
     {
-        int bigTotal = 0;
+        long bigTotal = 0;
         var heatMap = GetHeatMap(input);
 
         var lows = GetLowPoints(heatMap);
@@ -99,8 +99,6 @@ public class Day9 : IDay
 
     public ulong Part2(string input)
     {
-        var bigTotal = 0;
-
         var heatMap = GetHeatMap(input);
 
         foreach (var lowPoint in GetLowPoints(heatMap))

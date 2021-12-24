@@ -5,9 +5,9 @@ namespace AdventOfCodeConsole.Tools;
 
 internal static class InputReader
 {
-    internal static async Task<string?> GetInputForDay(int day, int year = 2021)
+    internal static async Task<string> GetInputForDay(int day, int year = 2021)
     {
-        string? input;
+        string input;
 
         var filename = $"{year}_{day}_Input.txt";
         if (!File.Exists(filename))

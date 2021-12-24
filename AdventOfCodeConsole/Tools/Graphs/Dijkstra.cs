@@ -9,7 +9,7 @@ class Dijkstra
 {
     private List<Vertex> _nodes;
     private List<Edge> _edges;
-    private List<Vertex?> _basis;
+    private List<Vertex> _basis;
     private Dictionary<string, double> _dist;
     private Dictionary<string, Vertex?> _previous;
 
@@ -17,7 +17,7 @@ class Dijkstra
     {
         _edges = edges;
         _nodes = nodes;
-        _basis = new List<Vertex?>();
+        _basis = new List<Vertex>();
         _dist = new Dictionary<string, double>();
         _previous = new Dictionary<string, Vertex?>();
 
@@ -37,8 +37,8 @@ class Dijkstra
 
         while (_basis.Count > 0)
         {
-            Vertex? u = GetNodeWithSmallestDistance();
-            if (u == null)
+            Vertex u = GetNodeWithSmallestDistance();
+            if (u == default)
             {
                 _basis.Clear();
             }
@@ -46,7 +46,7 @@ class Dijkstra
             {
                 foreach (Vertex v in GetNeighbours(u))
                 {
-                    double alt = _dist[u.Value.Name] + GetDistanceBetween(u, v);
+                    double alt = _dist[u.Name] + GetDistanceBetween(u, v);
                     if (alt < _dist[v.Name])
                     {
                         _dist[v.Name] = alt;
@@ -74,10 +74,10 @@ class Dijkstra
         return path;
     }
 
-    private Vertex? GetNodeWithSmallestDistance()
+    private Vertex GetNodeWithSmallestDistance()
     {
         double distance = double.MaxValue;
-        Vertex? smallest = null;
+        Vertex smallest = default;
 
         foreach (Vertex n in _basis)
         {
@@ -91,7 +91,7 @@ class Dijkstra
         return smallest;
     }
 
-    public List<Vertex> GetNeighbours(Vertex? n)
+    public List<Vertex> GetNeighbours(Vertex n)
     {
         List<Vertex> neighbors = new List<Vertex>();
 
@@ -106,7 +106,7 @@ class Dijkstra
         return neighbors;
     }
 
-    private double GetDistanceBetween(Vertex? o, Vertex? d)
+    private double GetDistanceBetween(Vertex o, Vertex? d)
     {
         foreach (Edge e in _edges)
         {

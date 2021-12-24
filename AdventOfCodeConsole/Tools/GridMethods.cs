@@ -2,13 +2,13 @@
 
 public class GridMethods
 {
-    public static IEnumerable<Point> AdjacentPoints(int[,] array, int row, int column)
+    public static IEnumerable<Point> AdjacentPoints(long[,] array, long row, long column)
     {
-        int rows = array.GetLength(0);
-        int columns = array.GetLength(1);
+        long rows = array.GetLongLength(0);
+        long columns = array.GetLongLength(1);
 
-        for (int y = row - 1; y <= row + 1; y++)
-            for (int x = column - 1; x <= column + 1; x++)
+        for (long y = row - 1; y <= row + 1; y++)
+            for (long x = column - 1; x <= column + 1; x++)
                 if (x >= 0 && y >= 0 && x < columns && y < rows)
                     if (!(y == row && x == column)
                         && !(y == row - 1 && x == column - 1)
@@ -32,8 +32,8 @@ public class GridMethods
     /// </returns>
     public static IEnumerable<Point> NeighbouringPoints(int[,] array, int row, int column)
     {
-        int rows = array.GetLength(0);
-        int columns = array.GetLength(1);
+        long rows = array.GetLongLength(0);
+        long columns = array.GetLongLength(1);
 
         for (int y = row - 1; y <= row + 1; y++)
             for (int x = column - 1; x <= column + 1; x++)
@@ -49,15 +49,15 @@ public class GridMethods
     /// <param name="column">The x coordinate of the centre point</param>
     /// <returns>
     /// A collection of points surrounding and including the centre point,
-    /// as well as points outside of the grid <paramref name="array"/>
+    /// as well as points along a border outside of the grid <paramref name="array"/>
     /// </returns>
     public static IEnumerable<Point> NeighbouringPointsExpanded(int[,] array, Point centre)
     {
-        int rows = array.GetLength(0);
-        int columns = array.GetLength(1);
+        long rows = array.GetLongLength(0);
+        long columns = array.GetLongLength(1);
 
-        for (int y = centre.Y - 1; y <= centre.Y + 1; y++)
-            for (int x = centre.X - 1; x <= centre.X + 1; x++)
+        for (long y = centre.Y - 1; y <= centre.Y + 1; y++)
+            for (long x = centre.X - 1; x <= centre.X + 1; x++)
                 yield return new Point(y, x);
     }
 }

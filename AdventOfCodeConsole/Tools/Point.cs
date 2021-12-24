@@ -4,14 +4,14 @@ namespace AdventOfCodeConsole.Tools;
 
 public record Point
 {
-    public int Y { get; init; }
-    public int X { get; init; }
+    public long Y { get; init; }
+    public long X { get; init; }
 
     public Point()
     {
     }
 
-    public Point(int y, int x)
+    public Point(long y, long x)
     {
         Y = y;
         X = x;

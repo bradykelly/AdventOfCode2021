@@ -4,7 +4,7 @@
     {
         private class BitString
         {
-            public int ReadPos { get; private set; } = 0;
+            public int ReadPos { get; private set; }
             public string Bits { get; set; }
 
             public BitString(string bits)
@@ -26,17 +26,19 @@
             public short Version { get; set; }
             public short Type { get; set; }
             public short LengthType { get; set; }
-            public List<string> LiteralNybles { get; set; } = new();
-            public string Padding { get; set; }
+            public List<string> LiteralNibles { get; set; } = new();
+            public string? Padding { get; set; }
         }
 
         private static void ProcessPackets(BitString bitString, ref int versionSum, bool iterating = false)
         {
             while (bitString.ReadPos < bitString.Bits.Length - 10)
             {
-                var packet = new Packet();
-                packet.Version = Convert.ToInt16(bitString.ReadBits(3), 2);
-                packet.Type = Convert.ToInt16(bitString.ReadBits(3), 2);
+                var packet = new Packet
+                {
+                    Version = Convert.ToInt16(bitString.ReadBits(3), 2),
+                    Type = Convert.ToInt16(bitString.ReadBits(3), 2)
+                };
                 versionSum += packet.Version;
 
                 switch (packet.Type)
@@ -47,7 +49,7 @@
                             do
                             {
                                 fiveBits = bitString.ReadBits(5);
-                                packet.LiteralNybles.Add(fiveBits[1..]);
+                                packet.LiteralNibles.Add(fiveBits[1..]);
                             } while (fiveBits[0] != '0');
                             break;
                         }
@@ -59,7 +61,7 @@
                             {
                                 var len = Convert.ToInt32(bitString.ReadBits(15), 2);
                                 var nextBitString = new BitString(bitString.ReadBits(len));
-                                ProcessPackets(nextBitString, ref versionSum, false);
+                                ProcessPackets(nextBitString, ref versionSum);
                             } else if (packet.LengthType == 1)
                             {
                                 var count = Convert.ToInt32(bitString.ReadBits(11), 2);
@@ -86,7 +88,7 @@
             var bitString = new BitString(binaryString);
 
             var versionSum = 0;
-            ProcessPackets(bitString, ref versionSum, false);
+            ProcessPackets(bitString, ref versionSum);
 
             return (ulong)versionSum;
         }

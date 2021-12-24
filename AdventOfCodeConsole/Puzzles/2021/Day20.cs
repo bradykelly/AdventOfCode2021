@@ -34,7 +34,7 @@ public class Day20: IDay
 
     private static List<Point> GetNeighbours(Point centre)
     {
-        var deltas = new List<(int dy, int dx)>
+        var deltas = new List<(long dy, long dx)>
         {
             (-1, -1), (-1, 0), (-1, +1),
             (0, -1), (0, 0), (0, +1),
@@ -42,7 +42,7 @@ public class Day20: IDay
         };
 
         var retList = new List<Point>();
-        foreach ((int dy, int dx) in deltas)
+        foreach ((long dy, long dx) in deltas)
         {
             retList.Add(new Point(centre.X + dy, centre.Y + dx));
         }

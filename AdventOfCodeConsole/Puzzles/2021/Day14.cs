@@ -65,7 +65,9 @@ public class Day14 : IDay
         var workingPolymer = new StringBuilder(lines[0]);
         Dictionary<char, int> counts = new();
 
+#pragma warning disable CS8321
         void IncrementCharCount(char charToCount)
+#pragma warning restore CS8321
         {
             if (!counts.ContainsKey(charToCount))
                 counts.Add(charToCount, 1);

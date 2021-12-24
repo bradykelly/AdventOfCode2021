@@ -10,13 +10,13 @@ public class Day11 : IDay
 {
     public static int DayNumber => 11;
 
-    static Octopus[,] _octoGrid;
+    private static Octopus[,] _octoGrid = new Octopus[0, 0];
 
     public static void DebugGrid()
     {
-        for (int y = 0; y < _octoGrid.GetLength(0); y++)
+        for (int y = 0; y < _octoGrid.GetLongLength(0); y++)
         {
-            for (int x = 0; x < _octoGrid.GetLength(1); x++)
+            for (int x = 0; x < _octoGrid.GetLongLength(1); x++)
             {
                 Debug.Write(_octoGrid[y, x].Energy);
             }
@@ -28,7 +28,7 @@ public class Day11 : IDay
     {
         var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
         _octoGrid = new Octopus[lines.Length, lines[0].Length];
-        for (int y = 0; y < _octoGrid.GetLength(0); y++)
+        for (int y = 0; y < _octoGrid.GetLongLength(0); y++)
         {
             string? line = lines[y];
             for (int x = 0; x < line.Length; x++)
@@ -56,8 +56,8 @@ public class Day11 : IDay
 
         public static IEnumerable<Octopus> GetNeighbours(Octopus[,] array, int row, int column)
         {
-            int rows = array.GetLength(0);
-            int columns = array.GetLength(1);
+            long rows = array.GetLongLength(0);
+            long columns = array.GetLongLength(1);
 
             for (int y = row - 1; y <= row + 1; y++)
                 for (int x = column - 1; x <= column + 1; x++)
@@ -95,9 +95,9 @@ public class Day11 : IDay
     {
         var count = 0;
 
-        for (int y = 0; y < _octoGrid.GetLength(0); y++)
+        for (int y = 0; y < _octoGrid.GetLongLength(0); y++)
         {
-            for (int x = 0; x < _octoGrid.GetLength(1); x++)
+            for (int x = 0; x < _octoGrid.GetLongLength(1); x++)
             {
                 _octoGrid[y, x].Energy++;
                 if (_octoGrid[y, x].Energy is 10)
@@ -105,9 +105,9 @@ public class Day11 : IDay
             }
         }
 
-        for (int y = 0; y < _octoGrid.GetLength(0); y++)
+        for (int y = 0; y < _octoGrid.GetLongLength(0); y++)
         {
-            for (int x = 0; x < _octoGrid.GetLength(1); x++)
+            for (int x = 0; x < _octoGrid.GetLongLength(1); x++)
             {
                 if (_octoGrid[y, x].Energy > 9)
                     _octoGrid[y, x].Energy = 0;
