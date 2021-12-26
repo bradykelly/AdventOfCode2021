@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCodeConsole.Tools.AStar;
 
-internal record Tile : Point
+public record Tile : Point
 {
     public char Content { get; set; }
     public ulong Cost { get; set; }
@@ -9,6 +9,8 @@ internal record Tile : Point
     public Tile? Parent { get; set; }
 
     public Tile() { }
+
+    public Tile(long y, long x): base(y, x) { }
 
     public Tile(long y, long x, char value) : base(y, x)
     {

@@ -13,8 +13,7 @@ public class Day15: IDay
 
     public ulong Part1(string input)
     {
-        var astar = new AStarPathFinder(input);
-        astar.FindPath((0, 0), (9, 9));
+        AStarTest.DoTest(input);
 
         return 0;
     }
