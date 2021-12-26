@@ -11,6 +11,7 @@
 /// the Node class exposes an AddDirected() method, which adds a directed edge with an (optional) weight to
 /// some other Node.  These methods are marked internal, and are called by the Graph class.
 /// </summary>
+// BKTODO Override equality
 public partial record Node : INode<Node>
 {
     /// <summary>
@@ -37,7 +38,7 @@ public partial record Node : INode<Node>
     /// <summary>
     /// Returns an AdjacencyList of the Node's neighbors.
     /// </summary>
-    public AdjacencyList<Node>? Neighbors { get; private set; }
+    public AdjacencyList<Node>? Neighbors { get; }
 
     /// <summary>
     /// Returns the Node's Path Parent.

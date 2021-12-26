@@ -17,4 +17,8 @@
 	  <PackageReference Include="Microsoft.Toolkit.HighPerformance" Version="7.1.2" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\AdventOfCode.Graphs\AdventOfCode.Graphs.csproj" />
+	</ItemGroup>
+
 </Project>

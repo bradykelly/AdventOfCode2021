@@ -3,7 +3,7 @@
 namespace AdventOfCode.Graphs;
 
 // BKTODO Inherit ImmutableStack
-class Path<TNode> : IEnumerable<Path<TNode>>
+public class Path<TNode> : IEnumerable<Path<TNode>>
 {
     public TNode LastStep { get; private set; }
 

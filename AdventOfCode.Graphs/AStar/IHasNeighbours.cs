@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode.Graphs.AStar;
 
-internal interface IHasNeighbours<N>
+public interface IHasNeighbours<Tnode>
 {
-    IEnumerable<N> Neighbours { get; }
+    IEnumerable<Tnode> Neighbours { get; }
 }
