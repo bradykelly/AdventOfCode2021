@@ -48,6 +48,7 @@ namespace AdventOfCodeConsole.Puzzles._2021
             var bigTotal = 0;
             var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
 
+            // BKTODO Finish this bitch
             var perms = "abcdefg".Permutations();
             var maps = perms.Select(p => new string(p)).Select(perm => new[] { "abcdefg", perm }).ToArray();
             foreach (var line in lines)

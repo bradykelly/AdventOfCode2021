@@ -2,8 +2,6 @@
 
 namespace AdventOfCodeConsole.Puzzles._2021;
 
-// BKTODO Get rid of wasteful ToLists
-
 public class Day9 : IDay
 {
     private static long[,] GetHeatMap(string input)
@@ -34,7 +32,7 @@ public class Day9 : IDay
             for (var x = 0; x < colCount; x++)
             {
                 var pointHeight = heatMap[y, x];
-                var adjacents = GridMethods.AdjacentPoints(heatMap, y, x).ToList();
+                var adjacents = GridMethods.AdjacentPoints(heatMap, y, x);
 
                 var isLow = true;
                 foreach (var adj in adjacents)
@@ -69,7 +67,7 @@ public class Day9 : IDay
 
     private void GetBasinPoints(long[,] array, Point point, List<Point> basin)
     {
-        var neighbours = GridMethods.AdjacentPoints(array, point.Y, point.X).ToList();
+        var neighbours = GridMethods.AdjacentPoints(array, point.Y, point.X);
         foreach (var adj in neighbours)
         {
             if (array[adj.Y, adj.X] == 9 || PointInBasin(adj))

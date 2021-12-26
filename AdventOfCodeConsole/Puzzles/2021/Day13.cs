@@ -4,6 +4,8 @@ namespace AdventOfCodeConsole.Puzzles._2021;
 
 public class Day13 : IDay
 {
+    public static int DayNumber => 13;
+
     private static List<Point> GetPointsList(string input)
     {
         var points = new List<Point>();
@@ -56,8 +58,6 @@ public class Day13 : IDay
         }
         points = points.Distinct().ToList();
     }
-
-    public static int DayNumber => 13;
 
     public ulong Part1(string input)
     {

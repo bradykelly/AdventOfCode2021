@@ -6,8 +6,7 @@ namespace AdventOfCodeConsole.Tools
     {
         public static int IndexOf(this StringBuilder target, string stringToFind)
         {
-            // ReSharper disable once StringIndexOfIsCultureSpecific.1
-            return target.ToString().IndexOf(stringToFind);
+            return target.ToString().IndexOf(stringToFind, StringComparison.InvariantCulture);
         }
     }
 }

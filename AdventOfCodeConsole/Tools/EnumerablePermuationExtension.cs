@@ -4,9 +4,7 @@
     {
         private static void Swap<T>(ref T a, ref T b)
         {
-            T tmp = a;
-            a = b;
-            b = tmp;
+            (a, b) = (b, a);
         }
 
         private static void Permute<T>(T[] elements, int recursionDepth, int maxDepth, ICollection<T[]> results)
