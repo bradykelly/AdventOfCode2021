@@ -1,5 +1,4 @@
 ﻿using AdventOfCodeConsole.Tools;
-using System.Diagnostics;
 
 namespace AdventOfCodeConsole.Puzzles._2021;
 

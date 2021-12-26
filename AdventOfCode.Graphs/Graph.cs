@@ -1,4 +1,5 @@
-﻿namespace AdventOfCode.Graphs;
+﻿// ReSharper disable InvalidXmlDocComment
+namespace AdventOfCode.Graphs;
 
 /// <summary>
 /// The Graph class represents a graph, which is composed of a collection of nodes and edges.  This Graph class
@@ -8,15 +9,15 @@
 /// </summary>
 public class Graph<TNode> where TNode : INode<TNode>, new()
 {
-    private NodeList<TNode> nodes;
+    /// <summary>
+    /// Returns a reference to the set of nodes in the graph.
+    /// </summary>
+    public NodeList<TNode> Nodes = new NodeList<TNode>();
 
     /// <summary>
     /// Default constructor.  Creates a new Graph class instance.
     /// </summary>
-    public Graph()
-    {
-        this.nodes = new NodeList<TNode>();
-    }
+    public Graph() { }
 
     /// <summary>
     /// Creates a new graph class instance based on a list of nodes.
@@ -24,7 +25,7 @@ public class Graph<TNode> where TNode : INode<TNode>, new()
     /// <param name="nodes">The list of nodes to populate the newly created Graph class with.</param>
     public Graph(NodeList<TNode> nodes)
     {
-        this.nodes = nodes;
+        this.Nodes = nodes;
     }
 
     /// <summary>
@@ -32,7 +33,7 @@ public class Graph<TNode> where TNode : INode<TNode>, new()
     /// </summary>
     public virtual void Clear()
     {
-        nodes.Clear();
+        Nodes.Clear();
     }
 
     /// <summary>
@@ -43,33 +44,42 @@ public class Graph<TNode> where TNode : INode<TNode>, new()
     /// <returns>A reference to the TNode that was created and added to the graph.</returns>
     /// <remarks>If there already exists a node in the graph with the same <b>key</b> value then an
     /// <b>ArgumentException</b> exception will be thrown.</remarks>
-    public virtual TNode AddNode(string key, object data)
+    public virtual TNode AddNode(string? key, object data)
     {
         // Make sure the key is unique
-        if (!nodes.ContainsKey(key))
+        if (!Nodes.ContainsKey(key))
         {
             TNode n = new TNode() { Key = key, Data = data };
-            nodes.Add(n);
+            Nodes.Add(n);
             return n;
         }
         else
             throw new ArgumentException("There already exists a node in the graph with key " + key);
     }
 
-    public virtual TNode AddNode(string key, object data, int x, int y)
+    /// <summary>
+    /// Adds a new node to the graph.
+    /// </summary>
+    /// <param name="key">The key value of the node to add.</param>
+    /// <param name="data">The data of the node to add.</param>
+    /// <param name="y">The y coordinate of the node to add.</param>
+    /// <param name="x">The x coordinate of the node to add.</param>
+    /// <returns></returns>
+    /// <remarks>If there already exists a node in the graph with the same <b>key</b> value then an
+    /// <b>ArgumentException</b> exception will be thrown.</remarks>
+    public virtual TNode AddNode(string? key, object data, int y, int x)
     {
         // Make sure the key is unique
-        if (!nodes.ContainsKey(key))
+        if (!Nodes.ContainsKey(key))
         {
             TNode n = new TNode
             {
                 Key = key,
                 Data = data,
-                X = x,
-                Y = y
-
+                Y = y,
+                X = x
             };
-            nodes.Add(n);
+            Nodes.Add(n);
             return n;
         }
         else
@@ -87,8 +97,8 @@ public class Graph<TNode> where TNode : INode<TNode>, new()
     public virtual void AddNode(TNode n)
     {
         // Make sure this node is unique
-        if (!nodes.ContainsKey(n.Key))
-            nodes.Add(n);
+        if (!Nodes.ContainsKey(n.Key))
+            Nodes.Add(n);
         else
             throw new ArgumentException("There already exists a node in the graph with key " + n.Key);
     }
@@ -99,7 +109,7 @@ public class Graph<TNode> where TNode : INode<TNode>, new()
     /// <param name="vKey">The <b>Key</b> of the node from which the directed edge leads to.</param>
     /// <remarks>If nodes with <b>uKey</b> and <b>vKey</b> do not exist in the graph, an <b>ArgumentException</b>
     /// exception is thrown.</remarks>
-    public virtual void AddDirectedEdge(string uKey, string vKey)
+    public virtual void AddDirectedEdge(string? uKey, string? vKey)
     {
         AddDirectedEdge(uKey, vKey, 0);
     }
@@ -112,11 +122,11 @@ public class Graph<TNode> where TNode : INode<TNode>, new()
     /// <param name="cost">The weight of the edge.</param>
     /// <remarks>If nodes with <b>uKey</b> and <b>vKey</b> do not exist in the graph, an <b>ArgumentException</b>
     /// exception is thrown.</remarks>
-    public virtual void AddDirectedEdge(string uKey, string vKey, int cost)
+    public virtual void AddDirectedEdge(string? uKey, string? vKey, int cost)
     {
         // get references to uKey and vKey
-        if (nodes.ContainsKey(uKey) && nodes.ContainsKey(vKey))
-            AddDirectedEdge(nodes[uKey], nodes[vKey], cost);
+        if (Nodes.ContainsKey(uKey) && Nodes.ContainsKey(vKey))
+            AddDirectedEdge(Nodes[uKey], Nodes[vKey], cost);
         else
             throw new ArgumentException("One or both of the nodes supplied were not members of the graph.");
     }
@@ -144,7 +154,7 @@ public class Graph<TNode> where TNode : INode<TNode>, new()
     public virtual void AddDirectedEdge(TNode u, TNode v, int cost)
     {
         // Make sure u and v are Nodes in this graph
-        if (nodes.ContainsKey(u.Key) && nodes.ContainsKey(v.Key))
+        if (Nodes.ContainsKey(u.Key) && Nodes.ContainsKey(v.Key))
             // add an edge from u -> v
             u.AddDirected(v, cost);
         else
@@ -157,7 +167,7 @@ public class Graph<TNode> where TNode : INode<TNode>, new()
     /// </summary>
     /// <remarks>If nodes with <b>uKey</b> and <b>vKey</b> do not exist in the graph, an <b>ArgumentException</b>
     /// exception is thrown.</remarks>
-    public virtual void AddUndirectedEdge(string uKey, string vKey)
+    public virtual void AddUndirectedEdge(string? uKey, string? vKey)
     {
         AddUndirectedEdge(uKey, vKey, 0);
     }
@@ -168,11 +178,11 @@ public class Graph<TNode> where TNode : INode<TNode>, new()
     /// <param name="cost">The weight of the edge.</param>
     /// <remarks>If nodes with <b>uKey</b> and <b>vKey</b> do not exist in the graph, an <b>ArgumentException</b>
     /// exception is thrown.</remarks>
-    public virtual void AddUndirectedEdge(string uKey, string vKey, int cost)
+    public virtual void AddUndirectedEdge(string? uKey, string? vKey, int cost)
     {
         // get references to uKey and vKey
-        if (nodes.ContainsKey(uKey) && nodes.ContainsKey(vKey))
-            AddUndirectedEdge(nodes[uKey], nodes[vKey], cost);
+        if (Nodes.ContainsKey(uKey) && Nodes.ContainsKey(vKey))
+            AddUndirectedEdge(Nodes[uKey], Nodes[vKey], cost);
         else
             throw new ArgumentException("One or both of the nodes supplied were not members of the graph.");
     }
@@ -196,7 +206,7 @@ public class Graph<TNode> where TNode : INode<TNode>, new()
     public virtual void AddUndirectedEdge(TNode u, TNode v, int cost)
     {
         // Make sure u and v are Nodes in this graph
-        if (nodes.ContainsKey(u.Key) && nodes.ContainsKey(v.Key))
+        if (Nodes.ContainsKey(u.Key) && Nodes.ContainsKey(v.Key))
         {
             // Add an edge from u -> v and from v -> u
             u.AddDirected(v, cost);
@@ -216,7 +226,7 @@ public class Graph<TNode> where TNode : INode<TNode>, new()
     public virtual void AddUndirectedEdge(TNode u, TNode v, double cost)
     {
         // Make sure u and v are Nodes in this graph
-        if (nodes.ContainsKey(u.Key) && nodes.ContainsKey(v.Key))
+        if (Nodes.ContainsKey(u.Key) && Nodes.ContainsKey(v.Key))
         {
             // Add an edge from u -> v and from v -> u
             u.AddDirected(v, cost);
@@ -228,32 +238,7 @@ public class Graph<TNode> where TNode : INode<TNode>, new()
     }
 
     /// <summary>
-    /// Determines if a node exists within the graph.
-    /// </summary>
-    /// <param name="n">The node to check for in the graph.</param>
-    /// <returns><b>True</b> if the node <b>n</b> exists in the graph, <b>False</b> otherwise.</returns>
-    public virtual bool Contains(Node n)
-    {
-        return Contains(n.Key);
-    }
-
-    /// <summary>
-    /// Determines if a node exists within the graph.
-    /// </summary>
-    /// <param name="key">The key of the node to check for in the graph.</param>
-    /// <returns><b>True</b> if a node with key <b>key</b> exists in the graph, <b>False</b> otherwise.</returns>
-    public virtual bool Contains(string key)
-    {
-        return nodes.ContainsKey(key);
-    }
-
-    /// <summary>
     /// Returns the number of nodes in the graph.
     /// </summary>
-    public virtual int Count => nodes.Count;
-
-    /// <summary>
-    /// Returns a reference to the set of nodes in the graph.
-    /// </summary>
-    public virtual NodeList<TNode> Nodes => this.nodes;
+    public virtual int Count => Nodes.Count;
 }

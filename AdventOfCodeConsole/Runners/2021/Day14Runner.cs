@@ -4,7 +4,4 @@ namespace AdventOfCodeConsole.Runners._2021;
 
 public class Day14Runner : DayRunnerBase<Day14>
 {
-    public Day14Runner() 
-    {
-    }
 }

@@ -17,7 +17,7 @@ public partial record Node : INode<Node>
     /// <summary>
     /// Returns the Node's Key.
     /// </summary>
-    public string Key { get; init; }
+    public string? Key { get; init; }
 
     /// <summary>
     /// Returns the Node's Y coordinate.
@@ -33,27 +33,32 @@ public partial record Node : INode<Node>
     /// Returns the Node's Data.
     /// </summary>
     // BKTODO Make this generic
-    public object Data { get; init; }
+    public object? Data { get; init; }
 
     /// <summary>
     /// Returns an AdjacencyList of the Node's neighbors.
     /// </summary>
-    public AdjacencyList<Node>? Neighbors { get; }
+    public AdjacencyList<Node>? Adjacencies { get; } = new AdjacencyList<Node>();
 
     /// <summary>
     /// Returns the Node's Path Parent.
     /// </summary>
     public Node? PathParent { get; set; }
 
-    public Node(string key, object data, AdjacencyList<Node>? neighbors = null)
+    /// <summary>
+    /// This ctor is not intended for general use and it will leave property <see cref="Key"/> uninitialized.
+    /// </summary>
+    public Node() {}
+
+    public Node(string? key, object? data, AdjacencyList<Node>? neighbors = null)
     {
         Key = key;
         Data = data;
 
-        Neighbors = neighbors ?? new AdjacencyList<Node>();
+        Adjacencies = neighbors ?? new AdjacencyList<Node>();
     }
 
-    public Node(string key, object data, int y, int x, AdjacencyList<Node>? neighbors = null)
+    public Node(string? key, object? data, int y, int x, AdjacencyList<Node>? neighbors = null)
     {
         Y = y;
         X = x;
@@ -61,7 +66,7 @@ public partial record Node : INode<Node>
         Key = key;
         Data = data;
 
-        Neighbors = neighbors ?? new AdjacencyList<Node>();
+        Adjacencies = neighbors ?? new AdjacencyList<Node>();
     }
 
     /// <summary>
@@ -69,32 +74,34 @@ public partial record Node : INode<Node>
     /// </summary>
     public void AddDirected(Node n)
     {
-        AddDirected(new EdgeToNeighbor<Node>(n));
+        AddDirected(new EdgeToNeighbour<Node>(n));
     }
 
     /// <summary>
     /// Adds a weighted, directed edge from this node to the passed-in Node n.
     /// </summary>
+    /// <param name="n">The other node of the edge</param>
     /// <param name="cost">The weight of the edge.</param>
     public void AddDirected(Node n, int cost)
     {
-        AddDirected(new EdgeToNeighbor<Node>(n, cost));
+        AddDirected(new EdgeToNeighbour<Node>(n, cost));
     }
 
     /// <summary>
     /// Adds a weighted, directed edge from this node to the passed-in Node n.
     /// </summary>
+    /// <param name="n">The other node of the edge</param>
     /// <param name="cost">The weight of the edge.</param>
     public void AddDirected(Node n, double cost)
     {
-        AddDirected(new EdgeToNeighbor<Node>(n, cost));
+        AddDirected(new EdgeToNeighbour<Node>(n, cost));
     }
 
     /// <summary>
     /// Adds an edge based on the data in the passed-in EdgeToNeighbor instance.
     /// </summary>
-    public void AddDirected(EdgeToNeighbor<Node> e)
+    public void AddDirected(EdgeToNeighbour<Node> e)
     {
-        Neighbors!.Add(e);
+        Adjacencies!.Add(e);
     }
 }

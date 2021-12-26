@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+// ReSharper disable InvalidXmlDocComment
 
 namespace AdventOfCode.Graphs;
 
@@ -17,7 +18,7 @@ public class NodeList<TNode> : IEnumerable where TNode : INode<TNode>
     /// </summary>
     public virtual void Add(TNode n)
     {
-        data.Add(n.Key, n);
+        data.Add(n.Key!, n);
     }
 
     /// <summary>
@@ -25,7 +26,7 @@ public class NodeList<TNode> : IEnumerable where TNode : INode<TNode>
     /// </summary>
     public virtual void Remove(TNode n)
     {
-        data.Remove(n.Key);
+        data.Remove(n.Key!);
     }
 
     /// <summary>
@@ -33,9 +34,9 @@ public class NodeList<TNode> : IEnumerable where TNode : INode<TNode>
     /// </summary>
     /// <param name="key">The <b>Key</b> value to search for.</param>
     /// <returns><b>True</b> if a Node with the specified <b>Key</b> exists in the NodeList; <b>False</b> otherwise.</returns>
-    public virtual bool ContainsKey(string key)
+    public virtual bool ContainsKey(string? key)
     {
-        return data.ContainsKey(key);
+        return data.ContainsKey(key!);
     }
 
     /// <summary>
@@ -58,24 +59,12 @@ public class NodeList<TNode> : IEnumerable where TNode : INode<TNode>
     /// <summary>
     /// Returns a particular <typeparamref name="TNode"/> instance by index.
     /// </summary>
-    public virtual TNode this[string key]
-    {
-        get
-        {
-            return (TNode)data[key];
-        }
-    }
+    public virtual TNode this[string? key] => (TNode)data[key!]!;
 
     /// <summary>
     /// Returns the number of nodes in the NodeList.
     /// </summary>
-    public virtual int Count
-    {
-        get
-        {
-            return data.Count;
-        }
-    }
+    public virtual int Count => data.Count;
 
     /// <summary>
     /// The NodeListEnumerator method is a custom enumerator for the NodeList object.  It essentially serves
@@ -86,7 +75,7 @@ public class NodeList<TNode> : IEnumerable where TNode : INode<TNode>
     /// </summary>
     public class NodeListEnumerator : IEnumerator, IDisposable
     {
-        IDictionaryEnumerator _list;
+        private IDictionaryEnumerator _list;
 
         public NodeListEnumerator(IDictionaryEnumerator coll)
         {
@@ -103,20 +92,14 @@ public class NodeList<TNode> : IEnumerable where TNode : INode<TNode>
             return _list.MoveNext();
         }
 
-        public TNode Current
-        {
-            get
-            {
-                return (TNode)((DictionaryEntry)_list.Current).Value;
-            }
-        }
+        public TNode Current => (TNode)((DictionaryEntry)_list.Current).Value!;
 
         // The current property on the IEnumerator interface:
         object IEnumerator.Current => (Current);
 
         public void Dispose()
         {
-            _list = null;
+            _list = null!;
         }
     }
 }

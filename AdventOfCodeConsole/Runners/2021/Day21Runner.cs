@@ -1,5 +1,6 @@
 ﻿using AdventOfCodeConsole.Puzzles._2021;
-using AdventOfCodeConsole.Runners;
+
+namespace AdventOfCodeConsole.Runners._2021;
 
 public class Day21Runner: DayRunnerBase<Day21>
 {

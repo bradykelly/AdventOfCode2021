@@ -1,7 +1,6 @@
-﻿using AdventOfCodeConsole.Puzzles;
-using AdventOfCodeConsole.Tools;
+﻿using AdventOfCodeConsole.Tools;
 
-namespace AdventOfCodeConsole.Runners._2021;
+namespace AdventOfCodeConsole.Puzzles._2021;
 
 public class Day13 : IDay
 {

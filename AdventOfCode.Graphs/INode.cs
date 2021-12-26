@@ -5,7 +5,7 @@ public interface INode<TNode> where TNode: INode<TNode>
     /// <summary>
     /// Returns the Node's Key.
     /// </summary>
-    public string Key { get; init; }
+    public string? Key { get; init; }
 
     /// <summary>
     /// Returns the Node's Y coordinate.
@@ -21,7 +21,7 @@ public interface INode<TNode> where TNode: INode<TNode>
     /// Returns the Node's Data.
     /// </summary>
 // BKTODO Make this generic
-    public object Data { get; init; }
+    public object? Data { get; init; }
 
     public void AddDirected(TNode n);
 
@@ -29,5 +29,5 @@ public interface INode<TNode> where TNode: INode<TNode>
 
     public void AddDirected(TNode n, double cost);
 
-    public void AddDirected(EdgeToNeighbor<TNode> e);
+    public void AddDirected(EdgeToNeighbour<TNode> e);
 }

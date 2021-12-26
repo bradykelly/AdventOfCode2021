@@ -1,21 +1,9 @@
 ﻿using AdventOfCode.Graphs.AStar;
 
+// ReSharper disable once CheckNamespace
 namespace AdventOfCode.Graphs;
 
-public partial record Node: IHasNeighbours<Node>
+public partial record Node : IHasNeighbours<Node>
 {
-    public IEnumerable<Node> Neighbours
-    {
-        get
-        {
-            List<Node> nodes = new List<Node>();
-
-            foreach (EdgeToNeighbor<Node> etn in Neighbors!)
-            {
-                nodes.Add(etn.Neighbor);
-            }
-
-            return nodes;
-        }
-    }
+    public IEnumerable<Node> Neighbours => (from EdgeToNeighbour<Node> etn in Adjacencies! select etn.Neighbor).ToList();
 }

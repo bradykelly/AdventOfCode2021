@@ -1,11 +1,12 @@
 ﻿namespace AdventOfCode.Graphs;
+// ReSharper disable once InvalidXmlDocComment
 
 /// <summary>
 /// EdgeToNeighbor represents an edge emanating from one <typeparamref name="TNode"/> to its neighbor.  The EdgeToNeighbor
 /// class, then, contains a reference to the neighbor and the weight of the edge.
 /// </summary>
 // ReSharper disable once ClassWithVirtualMembersNeverInherited.Global
-public record EdgeToNeighbor<TNode> where TNode : INode<TNode>
+public record EdgeToNeighbour<TNode> where TNode : INode<TNode>
 {
     /// <summary>
     /// The weight of the edge.
@@ -19,7 +20,7 @@ public record EdgeToNeighbor<TNode> where TNode : INode<TNode>
     /// </summary>
     public virtual TNode Neighbor { get; private set; }
 
-    public EdgeToNeighbor(TNode neighbor, double cost = 0)
+    public EdgeToNeighbour(TNode neighbor, double cost = 0)
     {
         Cost = cost;
         Neighbor = neighbor;

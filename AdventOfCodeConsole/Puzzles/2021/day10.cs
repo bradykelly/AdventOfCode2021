@@ -8,7 +8,7 @@ public class Day10 : IDay
 
     public ulong Part1(string input)
     {
-        Dictionary<char, char> _matches = new()
+        Dictionary<char, char> matches = new()
         {
             { '(', ')' },
             { '[', ']' },
@@ -16,7 +16,7 @@ public class Day10 : IDay
             { '<', '>' }
         };
 
-        Dictionary<char, int> _scores = new()
+        Dictionary<char, int> scores = new()
         {
             { ')', 3 },
             { ']', 57 },
@@ -31,15 +31,15 @@ public class Day10 : IDay
         {
             foreach (var ch in line)
             {
-                if (_matches.ContainsKey(ch))
+                if (matches.ContainsKey(ch))
                 {
                     stack.Push(ch);
                 }
-                else if (_matches.ContainsValue(ch))
+                else if (matches.ContainsValue(ch))
                 {
                     var sp = stack.Pop();
-                    if (ch == _matches[sp]) continue;
-                    totalScore += _scores[ch];
+                    if (ch == matches[sp]) continue;
+                    totalScore += scores[ch];
                     _corrupted.Add(line);
                     break;
                 }
@@ -51,7 +51,7 @@ public class Day10 : IDay
 
     public ulong Part2(string input)
     {
-        Dictionary<char, char> _matches = new()
+        Dictionary<char, char> matches = new()
         {
             { ')', '(' },
             { ']', '[' },
@@ -74,14 +74,14 @@ public class Day10 : IDay
         {
             foreach (var ch in line)
             {
-                if (_matches.ContainsValue(ch))
+                if (matches.ContainsValue(ch))
                 {
                     stack.Push(ch);
                 }
                 else
                 {
                     var sp = stack.Pop();
-                    if (_matches[ch] != sp)
+                    if (matches[ch] != sp)
                     {
                         break;
                     }

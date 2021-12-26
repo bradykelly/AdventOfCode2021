@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AdventOfCodeConsole.Tools;
+﻿using AdventOfCodeConsole.Tools;
 
 namespace AdventOfCodeConsole.Puzzles._2021
 {
@@ -36,7 +31,6 @@ namespace AdventOfCodeConsole.Puzzles._2021
         public ulong Part1(string input)
         {
             var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
-            var uniqueLengths = _uniqueDigits.Select(kv => kv.Key.Length);
 
             var totalUniques = 0;
             foreach (var line in lines)
@@ -71,13 +65,11 @@ namespace AdventOfCodeConsole.Puzzles._2021
                     return new string(mapped.OrderBy(ch => ch).ToArray());
                 }
 
-                var correctMap = new string[2];
                 foreach (var map in maps)
                 {
                     var mappedDigits = digitsIn.Select(digit => MapSortDigit(digit, map)).ToList();
                     var mapIsGood = mappedDigits.All(digit => _allDigits.ContainsKey(digit));
                     if (!mapIsGood) continue;
-                    correctMap = map;
                     break;
                 }
             }

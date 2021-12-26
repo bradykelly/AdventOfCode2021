@@ -4,26 +4,26 @@ namespace AdventOfCode.Graphs;
 
 /// <summary>
 /// AdjacencyList maintains a list of neighbors for a particular <see cref="Node"/>.  It is derived from CollectionBase
-/// and provides a strongly-typed collection of <see cref="EdgeToNeighbor"/> instances.
+/// and provides a strongly-typed collection of <see cref="EdgeToNeighbour{TNode}"/> instances.
 /// </summary>
 // ReSharper disable once ClassWithVirtualMembersNeverInherited.Global
 public class AdjacencyList<TNode> : CollectionBase where TNode : INode<TNode>
 {
     /// <summary>
-    /// Adds a new <see cref="EdgeToNeighbor"/> instance to the AdjacencyList.
+    /// Adds a new <see cref="EdgeToNeighbour{TNode}"/> instance to the AdjacencyList.
     /// </summary>
-    /// <param name="e">The <see cref="EdgeToNeighbor"/> instance to add.</param>
-    protected internal virtual void Add(EdgeToNeighbor<TNode> e)
+    /// <param name="e">The <see cref="EdgeToNeighbour{TNode}"/> instance to add.</param>
+    protected internal virtual void Add(EdgeToNeighbour<TNode> e)
     {
-        base.InnerList.Add(e);
+        InnerList.Add(e);
     }
 
     /// <summary>
-    /// Returns a particular <see cref="EdgeToNeighbor"/> instance by index.
+    /// Returns a particular <see cref="EdgeToNeighbour{TNode}"/> instance by index.
     /// </summary>
-    public virtual EdgeToNeighbor<TNode> this[int index]
+    public virtual EdgeToNeighbour<TNode> this[int index]
     {
-        get => (EdgeToNeighbor<TNode>)InnerList[index];
+        get => (EdgeToNeighbour<TNode>)InnerList[index]!;
         set => InnerList[index] = value;
     }
 }

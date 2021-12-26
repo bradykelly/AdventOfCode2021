@@ -12,7 +12,7 @@ public class Day21: IDay
         return (p1, p2);
     }
 
-    private int rollCount = 0;
+    private int _rollCount;
     private int RollDie(ref int dieFace)
     {
         var total = 0;
@@ -23,7 +23,7 @@ public class Day21: IDay
             {
                 dieFace = 1;
             }
-            rollCount++;
+            _rollCount++;
         }
         return total;
     }
@@ -43,7 +43,7 @@ public class Day21: IDay
 
             if (p1Score >= 1000)
             {
-                return (ulong)(p2Score * rollCount);
+                return (ulong)(p2Score * _rollCount);
             }
 
             var p2Die = RollDie(ref dieFace);
@@ -52,7 +52,7 @@ public class Day21: IDay
 
             if (p2Score >= 1000)
             {
-                return (ulong)(p1Score * rollCount);
+                return (ulong)(p1Score * _rollCount);
             }
         }
     }

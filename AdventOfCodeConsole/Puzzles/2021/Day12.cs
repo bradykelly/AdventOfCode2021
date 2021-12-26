@@ -1,4 +1,5 @@
-﻿namespace AdventOfCodeConsole.Puzzles._2021
+﻿// ReSharper disable PossibleMultipleEnumeration
+namespace AdventOfCodeConsole.Puzzles._2021
 {
     public class Day12 : IDay
     {
@@ -33,11 +34,11 @@
 
                 if (char.IsLower(current[0]))
                 {
-                    if (path!.Contains(current))
+                    if (path.Contains(current))
                         yield break;
                 }
 
-                path = path!.Append(current);
+                path = path.Append(current);
 
                 if (current == end)
                 {

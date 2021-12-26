@@ -10,15 +10,15 @@ public class Day11 : IDay
 {
     public static int DayNumber => 11;
 
-    private static Octopus[,] _octoGrid = new Octopus[0, 0];
+    private static Octopus[,] OctoGrid = new Octopus[0, 0];
 
     public static void DebugGrid()
     {
-        for (int y = 0; y < _octoGrid.GetLongLength(0); y++)
+        for (int y = 0; y < OctoGrid.GetLongLength(0); y++)
         {
-            for (int x = 0; x < _octoGrid.GetLongLength(1); x++)
+            for (int x = 0; x < OctoGrid.GetLongLength(1); x++)
             {
-                Debug.Write(_octoGrid[y, x].Energy);
+                Debug.Write(OctoGrid[y, x].Energy);
             }
             Debug.WriteLine(null);
         }
@@ -27,14 +27,14 @@ public class Day11 : IDay
     private static void BuildGrid(string input)
     {
         var lines = input.Split('\n', StringSplitOptions.RemoveEmptyEntries);
-        _octoGrid = new Octopus[lines.Length, lines[0].Length];
-        for (int y = 0; y < _octoGrid.GetLongLength(0); y++)
+        OctoGrid = new Octopus[lines.Length, lines[0].Length];
+        for (int y = 0; y < OctoGrid.GetLongLength(0); y++)
         {
-            string? line = lines[y];
+            string line = lines[y];
             for (int x = 0; x < line.Length; x++)
             {
                 char ch = line[x];
-                _octoGrid[y, x] = new Octopus(y, x, ch - '0');
+                OctoGrid[y, x] = new Octopus(y, x, ch - '0');
             }
         }
     }
@@ -63,7 +63,6 @@ public class Day11 : IDay
                 for (int x = column - 1; x <= column + 1; x++)
                     if (x >= 0 && y >= 0 && x < columns && y < rows && !(y == row && x == column))
                     {
-                        var oct = array[y, x];
                         yield return array[y, x];
                     }
         }
@@ -95,22 +94,22 @@ public class Day11 : IDay
     {
         var count = 0;
 
-        for (int y = 0; y < _octoGrid.GetLongLength(0); y++)
+        for (int y = 0; y < OctoGrid.GetLongLength(0); y++)
         {
-            for (int x = 0; x < _octoGrid.GetLongLength(1); x++)
+            for (int x = 0; x < OctoGrid.GetLongLength(1); x++)
             {
-                _octoGrid[y, x].Energy++;
-                if (_octoGrid[y, x].Energy is 10)
-                    count += _octoGrid[y, x].Flash(_octoGrid);
+                OctoGrid[y, x].Energy++;
+                if (OctoGrid[y, x].Energy is 10)
+                    count += OctoGrid[y, x].Flash(OctoGrid);
             }
         }
 
-        for (int y = 0; y < _octoGrid.GetLongLength(0); y++)
+        for (int y = 0; y < OctoGrid.GetLongLength(0); y++)
         {
-            for (int x = 0; x < _octoGrid.GetLongLength(1); x++)
+            for (int x = 0; x < OctoGrid.GetLongLength(1); x++)
             {
-                if (_octoGrid[y, x].Energy > 9)
-                    _octoGrid[y, x].Energy = 0;
+                if (OctoGrid[y, x].Energy > 9)
+                    OctoGrid[y, x].Energy = 0;
             }
         }
 

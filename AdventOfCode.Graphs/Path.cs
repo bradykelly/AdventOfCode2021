@@ -11,7 +11,7 @@ public class Path<TNode> : IEnumerable<Path<TNode>>
 
     public double TotalCost { get; private set; }
 
-    private Path(TNode lastStep, Path<TNode> previousSteps, double totalCost)
+    private Path(TNode lastStep, Path<TNode>? previousSteps, double totalCost)
     {
         LastStep = lastStep;
 
@@ -29,7 +29,7 @@ public class Path<TNode> : IEnumerable<Path<TNode>>
 
     public IEnumerator<Path<TNode>> GetEnumerator()
     {
-        for (Path<TNode> p = this; p != null; p = p.PreviousSteps)
+        for (Path<TNode> p = this; p != null; p = p.PreviousSteps!)
             yield return p;
     }
 

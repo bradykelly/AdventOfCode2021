@@ -57,7 +57,7 @@ public class Day4 : IDay
             {
                 var fieldSplit = field.Split(':');
                 required.Fields[field.Split(':')[0]] = true;
-                var x = fieldSplit.Length > 1 ? field.Split(':')[1] : "";
+                _ = fieldSplit.Length > 1 ? field.Split(':')[1] : "";
             }
             if (required.AllPresent())
             {

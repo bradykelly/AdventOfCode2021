@@ -1,96 +1,95 @@
-﻿namespace AdventOfCodeConsole.Puzzles._2021
+﻿namespace AdventOfCodeConsole.Puzzles._2021;
+
+public class Day16 : IDay
 {
-    public class Day16 : IDay
+    private class BitString
     {
-        private class BitString
+        public int ReadPos { get; private set; }
+        public string Bits { get; set; }
+
+        public BitString(string bits)
         {
-            public int ReadPos { get; private set; }
-            public string Bits { get; set; }
-
-            public BitString(string bits)
-            {
-                Bits = bits;
-            }
-
-            public string ReadBits(int numBits)
-            {
-                var bits = Bits.Substring(ReadPos, numBits);
-                ReadPos += numBits;
-                return bits;
-            }
-
+            Bits = bits;
         }
 
-        private class Packet
+        public string ReadBits(int numBits)
         {
-            public short Version { get; set; }
-            public short Type { get; set; }
-            public short LengthType { get; set; }
-            public List<string> LiteralNibles { get; set; } = new();
-            public string? Padding { get; set; }
+            var bits = Bits.Substring(ReadPos, numBits);
+            ReadPos += numBits;
+            return bits;
         }
 
-        private static void ProcessPackets(BitString bitString, ref int versionSum, bool iterating = false)
+    }
+
+    private class Packet
+    {
+        public short Version { get; set; }
+        public short Type { get; set; }
+        public short LengthType { get; set; }
+        public List<string> LiteralNibles { get; set; } = new();
+        public string? Padding { get; set; }
+    }
+
+    private static void ProcessPackets(BitString bitString, ref int versionSum, bool iterating = false)
+    {
+        while (bitString.ReadPos < bitString.Bits.Length - 10)
         {
-            while (bitString.ReadPos < bitString.Bits.Length - 10)
+            var packet = new Packet
             {
-                var packet = new Packet
-                {
-                    Version = Convert.ToInt16(bitString.ReadBits(3), 2),
-                    Type = Convert.ToInt16(bitString.ReadBits(3), 2)
-                };
-                versionSum += packet.Version;
+                Version = Convert.ToInt16(bitString.ReadBits(3), 2),
+                Type = Convert.ToInt16(bitString.ReadBits(3), 2)
+            };
+            versionSum += packet.Version;
 
-                switch (packet.Type)
+            switch (packet.Type)
+            {
+                case 4:
                 {
-                    case 4:
-                        {
-                            string fiveBits;
-                            do
-                            {
-                                fiveBits = bitString.ReadBits(5);
-                                packet.LiteralNibles.Add(fiveBits[1..]);
-                            } while (fiveBits[0] != '0');
-                            break;
-                        }
-
-                    default:
-                        {
-                            packet.LengthType = short.Parse(bitString.ReadBits(1));
-                            if (packet.LengthType == 0)
-                            {
-                                var len = Convert.ToInt32(bitString.ReadBits(15), 2);
-                                var nextBitString = new BitString(bitString.ReadBits(len));
-                                ProcessPackets(nextBitString, ref versionSum);
-                            } else if (packet.LengthType == 1)
-                            {
-                                var count = Convert.ToInt32(bitString.ReadBits(11), 2);
-                                for (var c = 0; c < count; c++)
-                                {
-                                    ProcessPackets(bitString, ref versionSum, true);
-                                }
-                            }
-                            break;
-                        }
+                    string fiveBits;
+                    do
+                    {
+                        fiveBits = bitString.ReadBits(5);
+                        packet.LiteralNibles.Add(fiveBits[1..]);
+                    } while (fiveBits[0] != '0');
+                    break;
                 }
-                if (iterating)
-                    return;
+
+                default:
+                {
+                    packet.LengthType = short.Parse(bitString.ReadBits(1));
+                    if (packet.LengthType == 0)
+                    {
+                        var len = Convert.ToInt32(bitString.ReadBits(15), 2);
+                        var nextBitString = new BitString(bitString.ReadBits(len));
+                        ProcessPackets(nextBitString, ref versionSum);
+                    } else if (packet.LengthType == 1)
+                    {
+                        var count = Convert.ToInt32(bitString.ReadBits(11), 2);
+                        for (var c = 0; c < count; c++)
+                        {
+                            ProcessPackets(bitString, ref versionSum, true);
+                        }
+                    }
+                    break;
+                }
             }
+            if (iterating)
+                return;
         }
+    }
 
-        public static int DayNumber => 16;
+    public static int DayNumber => 16;
 
-        public ulong Part1(string input)
-        {
-            var binaryString = string.Join(string.Empty, input
-                .Where(c => c != '\n')
-                .Select(c => Convert.ToString(Convert.ToInt32(c.ToString(), 16), 2).PadLeft(4, '0')));
-            var bitString = new BitString(binaryString);
+    public ulong Part1(string input)
+    {
+        var binaryString = string.Join(string.Empty, input
+            .Where(c => c != '\n')
+            .Select(c => Convert.ToString(Convert.ToInt32(c.ToString(), 16), 2).PadLeft(4, '0')));
+        var bitString = new BitString(binaryString);
 
-            var versionSum = 0;
-            ProcessPackets(bitString, ref versionSum);
+        var versionSum = 0;
+        ProcessPackets(bitString, ref versionSum);
 
-            return (ulong)versionSum;
-        }
+        return (ulong)versionSum;
     }
 }

@@ -2,6 +2,7 @@
 
 public class Day5 : IDay
 {
+    // ReSharper disable once UnusedType.Local
     private enum ReturnPart
     {
 
@@ -47,6 +48,7 @@ public class Day5 : IDay
 
     public ulong Part2(string input)
     {
+        // BKTODO Finish this damn thing
         return 0;
     }
 }

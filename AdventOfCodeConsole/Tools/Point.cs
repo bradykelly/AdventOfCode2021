@@ -1,6 +1,4 @@
-﻿using System.Dynamic;
-
-namespace AdventOfCodeConsole.Tools;
+﻿namespace AdventOfCodeConsole.Tools;
 
 public record Point
 {

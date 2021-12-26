@@ -1,7 +1,4 @@
-﻿using AdventOfCodeConsole.Runners._2021;
-using AdventOfCodeConsole.Tools;
-using BenchmarkDotNet.Configs;
-using BenchmarkDotNet.Running;
+﻿using AdventOfCodeConsole.Runners;
 
 #if !DEBUG
 BenchmarkRunner.Run<Day15Runner>();

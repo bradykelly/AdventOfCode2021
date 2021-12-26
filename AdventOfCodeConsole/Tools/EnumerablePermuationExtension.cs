@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AdventOfCodeConsole.Tools
+﻿namespace AdventOfCodeConsole.Tools
 {
     public static class EnumerablePermuationExtension
     {

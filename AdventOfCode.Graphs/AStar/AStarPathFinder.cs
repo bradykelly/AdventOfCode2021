@@ -2,7 +2,7 @@
 
 public class AStarPathFinder
 {
-    public static Path<TNode> FindPath<TNode>(
+    public static Path<TNode>? FindPath<TNode>(
         TNode start,
         TNode destination,
         Func<TNode, TNode, double> distance,
