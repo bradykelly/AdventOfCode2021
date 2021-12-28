@@ -42,7 +42,7 @@ public class Day15: IDay
         Node start = graph.Nodes[CoordsToString(0, 0)];
         Node destination = graph.Nodes[CoordsToString(lines.Length - 1, lines[0].Length - 1)];
 
-        Func<Node, Node, double> distance = (node1, node2) => node1.Adjacencies!.Cast<EdgeToNeighbour<Node>>()
+        Func<Node, Node, double> distance = (node1, node2) => node1.EdgesOut!.Cast<EdgeToNeighbour<Node>>()
             .Single(etn => etn.Neighbor.Key == node2.Key).Cost;
 
         Func<Node, double> estimation = (startNode) => 

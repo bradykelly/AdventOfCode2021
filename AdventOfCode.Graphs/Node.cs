@@ -38,7 +38,7 @@ public partial record Node : INode<Node>
     /// <summary>
     /// Returns an AdjacencyList of the Node's neighbors.
     /// </summary>
-    public AdjacencyList<Node>? Adjacencies { get; } = new AdjacencyList<Node>();
+    public AdjacencyList<Node>? EdgesOut { get; } = new AdjacencyList<Node>();
 
     /// <summary>
     /// Returns the Node's Path Parent.
@@ -55,7 +55,7 @@ public partial record Node : INode<Node>
         Key = key;
         Data = data;
 
-        Adjacencies = neighbors ?? new AdjacencyList<Node>();
+        EdgesOut = neighbors ?? new AdjacencyList<Node>();
     }
 
     public Node(string? key, object? data, int y, int x, AdjacencyList<Node>? neighbors = null)
@@ -66,7 +66,7 @@ public partial record Node : INode<Node>
         Key = key;
         Data = data;
 
-        Adjacencies = neighbors ?? new AdjacencyList<Node>();
+        EdgesOut = neighbors ?? new AdjacencyList<Node>();
     }
 
     /// <summary>
@@ -102,6 +102,6 @@ public partial record Node : INode<Node>
     /// </summary>
     public void AddDirected(EdgeToNeighbour<Node> e)
     {
-        Adjacencies!.Add(e);
+        EdgesOut!.Add(e);
     }
 }

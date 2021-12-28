@@ -1,6 +1,7 @@
 ﻿namespace AdventOfCode.Graphs.AStar;
 
-public interface IHasNeighbours<Tnode>
+// ReSharper disable once TypeParameterCanBeVariant
+public interface IHasNeighbours<TNode>
 {
-    IEnumerable<Tnode> Neighbours { get; }
+    IEnumerable<TNode> Neighbours { get; }
 }

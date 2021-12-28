@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode.Graphs.AStar;
 
-public class AStarPathFinder
+public static class AStarPathFinder
 {
     public static Path<TNode>? FindPath<TNode>(
         TNode start,

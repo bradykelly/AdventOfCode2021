@@ -8,17 +8,18 @@ namespace AdventOfCode.Graphs;
 /// fast lookup via a <typeparamref name="TNode"/> class's <b>Key</b> value.  The <see cref="Graph"/> class maintains its
 /// list of nodes via this class.
 /// </summary>
+// ReSharper disable once ClassWithVirtualMembersNeverInherited.Global
 public class NodeList<TNode> : IEnumerable where TNode : INode<TNode>
 {
     // private member variables
-    private Hashtable data = new Hashtable();
+    private readonly Hashtable _data = new Hashtable();
 
     /// <summary>
     /// Adds a new Node to the NodeList.
     /// </summary>
     public virtual void Add(TNode n)
     {
-        data.Add(n.Key!, n);
+        _data.Add(n.Key!, n);
     }
 
     /// <summary>
@@ -26,7 +27,7 @@ public class NodeList<TNode> : IEnumerable where TNode : INode<TNode>
     /// </summary>
     public virtual void Remove(TNode n)
     {
-        data.Remove(n.Key!);
+        _data.Remove(n.Key!);
     }
 
     /// <summary>
@@ -36,7 +37,7 @@ public class NodeList<TNode> : IEnumerable where TNode : INode<TNode>
     /// <returns><b>True</b> if a Node with the specified <b>Key</b> exists in the NodeList; <b>False</b> otherwise.</returns>
     public virtual bool ContainsKey(string? key)
     {
-        return data.ContainsKey(key!);
+        return _data.ContainsKey(key!);
     }
 
     /// <summary>
@@ -44,7 +45,7 @@ public class NodeList<TNode> : IEnumerable where TNode : INode<TNode>
     /// </summary>
     public virtual void Clear()
     {
-        data.Clear();
+        _data.Clear();
     }
 
     /// <summary>
@@ -53,18 +54,18 @@ public class NodeList<TNode> : IEnumerable where TNode : INode<TNode>
     /// <returns></returns>
     public IEnumerator GetEnumerator()
     {
-        return new NodeListEnumerator(data.GetEnumerator());
+        return new NodeListEnumerator(_data.GetEnumerator());
     }
 
     /// <summary>
     /// Returns a particular <typeparamref name="TNode"/> instance by index.
     /// </summary>
-    public virtual TNode this[string? key] => (TNode)data[key!]!;
+    public virtual TNode this[string? key] => (TNode)_data[key!]!;
 
     /// <summary>
     /// Returns the number of nodes in the NodeList.
     /// </summary>
-    public virtual int Count => data.Count;
+    public virtual int Count => _data.Count;
 
     /// <summary>
     /// The NodeListEnumerator method is a custom enumerator for the NodeList object.  It essentially serves

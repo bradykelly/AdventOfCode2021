@@ -5,5 +5,7 @@ namespace AdventOfCode.Graphs;
 
 public partial record Node : IHasNeighbours<Node>
 {
-    public IEnumerable<Node> Neighbours => (from EdgeToNeighbour<Node> etn in Adjacencies! select etn.Neighbor).ToList();
+    public IEnumerable<Node> Neighbours => EdgesOut!
+        .Cast<EdgeToNeighbour<Node>>()
+        .Select(etn => etn.Neighbor).ToList();
 }
